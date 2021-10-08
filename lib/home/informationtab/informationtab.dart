@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:ventilator_ui/connect/realtimefetch.dart';
+import 'package:ventilator_ui/home/constant.dart';
 import 'graphs/graphs.dart';
 import 'indicators/indicators.dart';
 import 'plusminusbp/plusminusbp.dart';
@@ -40,50 +43,60 @@ class InformationTab extends StatelessWidget {
         //   ),
         // ],
       ),
-      child: Column(
-        children: [
-          const SizedBox(
-            height: 20,
+      child: MultiProvider(
+        providers: [
+          ChangeNotifierProvider(
+            create: (_) => UpdateAlarm(),
           ),
-          //TODO: Indicator White
-          const Expanded(
-            flex: 5,
-            child: Indicators(),
-          ),
-          SizedBox(
-            height: 5,
-            child: Container(
-              color: Colors.transparent,
-            ),
-          ),
-          Expanded(
-            flex: 20,
-            child: Container(
-              color: Colors.transparent,
-              child: Row(
-                children: const [
-                  //TODO: Graphs
-                  Expanded(
-                    flex: 5,
-                    child: Graphs(),
-                  ),
-
-                  //TODO: PlusMinus
-                  Expanded(
-                    flex: 3,
-                    child: PlusMinusBP(),
-                  ),
-
-                  //TODO: Profile
-                  Expanded(
-                    flex: 2,
-                    child: Profile(),
-                  ),
-                ],
-              ),
-            ),
+          ChangeNotifierProvider(
+            create: (_) => RealTimeClass(),
           ),
         ],
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 20,
+            ),
+            //TODO: Indicator White
+            const Expanded(
+              flex: 5,
+              child: Indicators(),
+            ),
+            SizedBox(
+              height: 5,
+              child: Container(
+                color: Colors.transparent,
+              ),
+            ),
+            Expanded(
+              flex: 20,
+              child: Container(
+                color: Colors.transparent,
+                child: Row(
+                  children: const [
+                    //TODO: Graphs
+                    Expanded(
+                      flex: 5,
+                      child: Graphs(),
+                    ),
+
+                    //TODO: PlusMinus
+                    Expanded(
+                      flex: 3,
+                      child: PlusMinusBP(),
+                    ),
+
+                    //TODO: Profile
+                    Expanded(
+                      flex: 2,
+                      child: Profile(),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

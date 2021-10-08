@@ -72,7 +72,7 @@ class PlusMinusBP extends StatelessWidget {
                     const PusMinusCard(
                       firstText: 'VT',
                       valueText: 600,
-                      addOn: '',
+                      subscriptText: '',
                     ),
                     SizedBox(
                       height: .7,
@@ -81,9 +81,9 @@ class PlusMinusBP extends StatelessWidget {
                       ),
                     ),
                     const PusMinusCard(
-                      firstText: 'PR',
+                      firstText: 'RR',
                       valueText: 12,
-                      addOn: '',
+                      subscriptText: '',
                     ),
                     SizedBox(
                       height: .7,
@@ -94,7 +94,7 @@ class PlusMinusBP extends StatelessWidget {
                     const PusMinusCard(
                       firstText: 'FiO',
                       valueText: 21,
-                      addOn: '2',
+                      subscriptText: '2',
                     ),
                   ],
                 ),
@@ -221,12 +221,12 @@ class PusMinusCard extends StatelessWidget {
     Key? key,
     required this.firstText,
     required this.valueText,
-    required this.addOn,
+    required this.subscriptText,
   }) : super(key: key);
 
   final String firstText;
   final int valueText;
-  final String addOn;
+  final String? subscriptText;
 
   @override
   Widget build(BuildContext context) {
@@ -239,42 +239,51 @@ class PusMinusCard extends StatelessWidget {
         child: Column(
           children: [
             Expanded(
-              flex: 1,
+              flex: 3,
               child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 5,
-                  ),
-                  child: Wrap(
-                    alignment: WrapAlignment.center,
-                    children: [
-                      AutoSizeText.rich(
-                        TextSpan(text: firstText),
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        minFontSize: 12,
-                        maxLines: 1,
+                padding: const EdgeInsets.symmetric(
+                  vertical: 5,
+                ),
+                child: Wrap(
+                  alignment: WrapAlignment.center,
+                  children: [
+                    RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: firstText,
+                            style: const TextStyle(
+                              fontSize: 20,
+                              color: Colors.black,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          subscriptText != null
+                              ? TextSpan(
+                                  text: subscriptText,
+                                  style: const TextStyle(
+                                    fontSize: 9,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w800,
+                                    fontFeatures: [FontFeature.subscripts()],
+                                  ),
+                                )
+                              : const TextSpan(
+                                  text: '',
+                                  style: TextStyle(
+                                    fontSize: 1,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                        ],
                       ),
-                      AutoSizeText(
-                        addOn.toString(),
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
-                          fontFeatures: [
-                            FontFeature.subscripts(),
-                          ],
-                        ),
-                        minFontSize: 6,
-                        maxLines: 1,
-                      ),
-                    ],
-                  )),
+                    ),
+                  ],
+                ),
+              ),
             ),
             Expanded(
-              flex: 3,
+              flex: 6,
               child: Container(
                 child: Row(
                   children: [
@@ -282,7 +291,7 @@ class PusMinusCard extends StatelessWidget {
                       flex: 1,
                       child: Container(
                         alignment: Alignment.centerRight,
-                        padding: const EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(5),
                         child: FloatingActionButton(
                           // foregroundColor: const Color(0xff7effee),
                           // backgroundColor: const Color(0xff43CFBC),
@@ -325,7 +334,7 @@ class PusMinusCard extends StatelessWidget {
                       flex: 1,
                       child: Container(
                         alignment: Alignment.centerLeft,
-                        padding: const EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(5),
                         child: FloatingActionButton(
                             // backgroundColor: const Color(0xff43CFBC),
                             backgroundColor: const Color(0xff5ab2b1),

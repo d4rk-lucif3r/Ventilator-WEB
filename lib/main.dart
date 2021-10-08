@@ -1,10 +1,19 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:ventilator_ui/connect/services.dart';
 
 import 'home/display.dart';
 
 void main() {
+  // List<dynamic> streamData = await fetchData("data?stream=1");
+  // print(streamData[0]['5'].toString());
+  // getRealtimeData();
+  // getData();
   runApp(const App());
 }
+
+//
 
 class App extends StatefulWidget {
   const App({Key? key}) : super(key: key);
@@ -88,7 +97,7 @@ class DisplayX extends StatelessWidget {
                       ),
                       color: Colors.transparent,
                       child: Row(
-                        children: const[
+                        children: const [
                           BottomTab(),
                           BottomTab(),
                           BottomTab(),
