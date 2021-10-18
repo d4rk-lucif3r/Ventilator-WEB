@@ -3,7 +3,8 @@ import 'dart:ui';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:ventilator_ui/home/constant.dart';
+import 'package:ventilator_ui/connect/alarmsync.dart';
+import 'package:ventilator_ui/constants/constant.dart';
 
 class IndicatorWhite extends StatefulWidget {
   const IndicatorWhite({
@@ -38,7 +39,7 @@ class _IndicatorWhiteState extends State<IndicatorWhite> {
   Widget build(BuildContext context) {
     return Expanded(
       flex: 1,
-      child: Consumer<UpdateAlarm>(
+      child: Consumer<AlarmSync>(
         builder: (context, provider, child) {
           return GestureDetector(
             onTap: widget.constValue == 100

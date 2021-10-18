@@ -11,34 +11,20 @@ const secret = String.fromEnvironment('secret');
 // const url = String.fromEnvironment('url');
 
 Future<List<dynamic>> fetchData(String api) async {
+  final finalURL = "$URL$api";
+  // print("$finalURL");
   final Response response = await get(
-    Uri.parse(URL + api),
+    Uri.parse(finalURL),
     headers: <String, String>{
       'x-access-tokens': secret,
     },
   );
   if (response.statusCode == 200) {
+    // print("Data arrived");
     return json.decode(response.body);
   } else {
+    // print("\n\nError\n\n");
     return json.decode(response.statusCode.toString());
   }
 }
-
-void getPatientData() async {
-  String name;
-  String age;
-  String height;
-  String weight;
-  String bloodGroup;
-  List<dynamic> data = await fetchData("patient?stream=1");
-  name = data[0]['name'].toString();
-  age = data[0]['age'].toString();
-  height = data[0]['height'].toString();
-  weight = data[0]['weight'].toString();
-  bloodGroup = data[0]['bloodgroup'].toString();
-  print("$name, $age, $height, $weight, $bloodGroup");
-
-  // print(data.length.toString());
-}
-
 

@@ -1,7 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:ventilator_ui/home/constant.dart';
+import 'package:ventilator_ui/connect/alarmsync.dart';
+import 'package:ventilator_ui/constants/constant.dart';
 import 'package:ventilator_ui/home/informationtab/profile/patient_profile.dart';
 import 'package:provider/provider.dart';
 import 'indicator_profile.dart';
@@ -20,36 +21,58 @@ class _ProfileState extends State<Profile> {
   //   setState(() {});
   // }
 
-  Widget _widgetRenderer(int value) {
+  Widget _widgetRenderer(int value, AlarmSync p) {
     switch (value) {
       case 0:
         return const PatientProfile();
-        break;
       case 1:
         return IndicatorProfile(
-          maxValue: alarmName[value][0][0],
-          minValue: alarmName[value][0][1],
-          firstText: alarmName[value][1][0],
+          maxValue: p.prmax,
+          minValue: p.prmin,
+          firstText: 'PR',
+          identifier: value,
         );
-        break;
       case 2:
         return IndicatorProfile(
-            maxValue: alarmName[value][0][0],
-            minValue: alarmName[value][0][1],
-            firstText: alarmName[value][1][0]);
-        break;
+          maxValue: p.spo2max,
+          minValue: p.spo2min,
+          firstText: 'Spo',
+          subscriptText: '2',
+          identifier: value,
+        );
+
       case 3:
         return IndicatorProfile(
-            maxValue: alarmName[value][0][0],
-            minValue: alarmName[value][0][1],
-            firstText: alarmName[value][1][0]);
-        break;
+          maxValue: p.pipmax,
+          minValue: p.pipmin,
+          firstText: 'PIP',
+          identifier: value,
+        );
+
       case 4:
         return IndicatorProfile(
-            maxValue: alarmName[value][0][0],
-            minValue: alarmName[value][0][1],
-            firstText: alarmName[value][1][0]);
-        break;
+          maxValue: p.peepmax,
+          minValue: p.peepmin,
+          firstText: 'PEEP',
+          identifier: value,
+        );
+
+      case 11:
+        return IndicatorProfile(
+          maxValue: p.sysmax,
+          minValue: p.sysmin,
+          firstText: 'SYS',
+          identifier: value,
+        );
+
+      case 12:
+        return IndicatorProfile(
+          maxValue: p.diamax,
+          minValue: p.diamin,
+          firstText: 'DIA',
+          identifier: value,
+        );
+
       default:
         return const PatientProfile();
     }
@@ -61,7 +84,7 @@ class _ProfileState extends State<Profile> {
 
     // print("Local widget width: $w and height: $h");
 
-    return Consumer<UpdateAlarm>(
+    return Consumer<AlarmSync>(
       builder: (context, provider, child) {
         return DefaultTextStyle(
           style: const TextStyle(
@@ -93,8 +116,8 @@ class _ProfileState extends State<Profile> {
               ],
             ),
             child: AnimatedSwitcher(
-              duration: Duration(milliseconds: 100),
-              child: _widgetRenderer(provider.isWhichSwitch),
+              duration: const Duration(milliseconds: 100),
+              child: _widgetRenderer(provider.isWhichSwitch, provider),
               // isWhichSwitch == 'default'
               //     ? PatientProfile()
               //     : IndicatorProfile(
