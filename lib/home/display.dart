@@ -2,10 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ventilator_ui/connect/alarmsync.dart';
 import 'package:ventilator_ui/connect/graph/chartsync.dart';
+import 'package:ventilator_ui/connect/login.dart';
 import 'package:ventilator_ui/connect/plusminusprovider.dart';
 import 'package:ventilator_ui/connect/realtimefetch.dart';
 import 'package:ventilator_ui/connect/tempprovider.dart';
 import '../constants/constant.dart';
+import 'package:ventilator_ui/connect/graph/ecg_1_graph.dart';
+import 'package:ventilator_ui/connect/graph/ecg_2_graph.dart';
+import 'package:ventilator_ui/connect/graph/ecg_3_graph.dart';
+import 'package:ventilator_ui/connect/graph/ecg_4_graph.dart';
 import 'informationtab/informationtab.dart';
 import 'navbar/navbar.dart';
 
@@ -57,9 +62,22 @@ class _DisplayState extends State<Display> {
         ChangeNotifierProvider(
           create: (_) => RealTimeGraph(),
         ),
+        ChangeNotifierProvider(
+          create: (_) => ECG1(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ECG2(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ECG3(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ECG4(),
+        ),
       ],
-      child: Consumer2<RealTimeClass, RealTimeGraph>(
-        builder: (context, provider, providerg, child) {
+      child: Consumer6<RealTimeClass, RealTimeGraph, ECG1, ECG2, ECG3, ECG4>(
+        builder: (context, provider, providerg, providerecg1, providerecg2,
+            providerecg3, providerecg4, child) {
           // return StreamBuilder(
           //     stream: provider.updateStreamedData(),
           //     builder: (context, snapshot) {
@@ -192,6 +210,10 @@ class _DisplayState extends State<Display> {
                               flex: 9,
                               child: InformationTab(
                                 providerg: providerg,
+                                providerecg1: providerecg1,
+                                providerecg2: providerecg2,
+                                providerecg3: providerecg3,
+                                providerecg4: providerecg4,
                               ),
                             ),
                           ],

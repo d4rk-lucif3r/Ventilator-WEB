@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ventilator_ui/connect/graph/chartsync.dart';
+import 'package:ventilator_ui/connect/graph/ecg_1_graph.dart';
+import 'package:ventilator_ui/connect/graph/ecg_2_graph.dart';
+import 'package:ventilator_ui/connect/graph/ecg_3_graph.dart';
+import 'package:ventilator_ui/connect/graph/ecg_4_graph.dart';
 import 'package:ventilator_ui/connect/realtimefetch.dart';
 import 'package:ventilator_ui/constants/constant.dart';
 import 'graphs/graphs.dart';
@@ -10,9 +14,18 @@ import 'profile/profile.dart';
 
 class InformationTab extends StatefulWidget {
   const InformationTab({
-    Key? key,required this.providerg,
+    Key? key,
+    required this.providerg,
+    required this.providerecg1,
+    required this.providerecg2,
+    required this.providerecg3,
+    required this.providerecg4,
   }) : super(key: key);
   final RealTimeGraph providerg;
+  final ECG1 providerecg1;
+  final ECG2 providerecg2;
+  final ECG3 providerecg3;
+  final ECG4 providerecg4;
 
   @override
   State<InformationTab> createState() => _InformationTabState();
@@ -85,11 +98,17 @@ class _InformationTabState extends State<InformationTab> {
             child: Container(
               color: Colors.transparent,
               child: Row(
-                children:  [
+                children: [
                   //TODO: Graphs
                   Expanded(
                     flex: 5,
-                    child: Graphs(providerg: widget.providerg,),
+                    child: Graphs(
+                      providerg: widget.providerg,
+                      providerecg1: widget.providerecg1,
+                      providerecg2: widget.providerecg2,
+                      providerecg3: widget.providerecg3,
+                      providerecg4: widget.providerecg4,
+                    ),
                   ),
 
                   //TODO: PlusMinus
