@@ -8,50 +8,51 @@ import 'package:ventilator_ui/connect/realtimefetch.dart';
 import 'package:ventilator_ui/connect/tempprovider.dart';
 import 'package:ventilator_ui/constants/constant.dart';
 
-class IndicatorProfile extends StatelessWidget {
-  const IndicatorProfile({
+class IndicatorProfile extends StatefulWidget {
+  IndicatorProfile({
     Key? key,
     required this.firstText,
     this.secondText,
     this.subscriptText,
-    required this.minValue,
-    required this.maxValue,
+    this.minValue = 0,
+    this.maxValue = 0,
     required this.identifier,
   }) : super(key: key);
 
-  final int minValue;
-  final int maxValue;
+  int minValue;
+  int maxValue;
   final String firstText;
   final String? secondText;
   final String? subscriptText;
   final int identifier;
 
+  void maxIncre() {
+    maxValue++;
+  }
+
+  void maxDecre() {
+    maxValue--;
+  }
+
+  void minIncre() {
+    minValue++;
+  }
+
+  void minDecre() {
+    minValue--;
+  }
+
+  @override
+  State<IndicatorProfile> createState() => _IndicatorProfileState();
+}
+
+class _IndicatorProfileState extends State<IndicatorProfile> {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
-        return Consumer2<AlarmSync, TempProvider>(
-          builder: (context, provider, tempprovider, child) {
-            switch (identifier) {
-              case 1:
-                tempprovider.setValue(provider.prmax, provider.prmin);
-                break;
-              case 2:
-                tempprovider.setValue(provider.spo2max, provider.spo2min);
-                break;
-              case 3:
-                tempprovider.setValue(provider.pipmax, provider.pipmin);
-                break;
-              case 4:
-                tempprovider.setValue(provider.peepmax, provider.peepmin);
-                break;
-              case 11:
-                tempprovider.setValue(provider.sysmax, provider.sysmin);
-                break;
-              case 12:
-                tempprovider.setValue(provider.diamax, provider.diamin);
-                break;
-            }
+        return Consumer<AlarmSync>(
+          builder: (context, provider, child) {
             return Container(
               width: constraints.maxWidth,
               height: constraints.maxHeight,
@@ -68,9 +69,9 @@ class IndicatorProfile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   AlarmText(
-                    firstText: firstText,
-                    secondText: secondText,
-                    subscriptText: subscriptText,
+                    firstText: widget.firstText,
+                    secondText: widget.secondText,
+                    subscriptText: widget.subscriptText,
                   ),
                   const SizedBox(
                     height: 10,
@@ -110,7 +111,8 @@ class IndicatorProfile extends StatelessWidget {
                               backgroundColor: const Color(0xff5ab2b1),
                               //TODO: Decrease MAX value
                               onPressed: () {
-                                tempprovider.decreValueMax();
+                                setState(() => widget.maxDecre());
+                                debugPrint(widget.maxValue.toString());
                                 // debugPrint("$max");
                               },
                               child: const Center(
@@ -133,7 +135,7 @@ class IndicatorProfile extends StatelessWidget {
                             alignment: Alignment.center,
                             padding: const EdgeInsets.all(5),
                             child: AutoSizeText(
-                              '${tempprovider.tempValueMax}',
+                              widget.maxValue.toString(),
                               style: const TextStyle(
                                   color: Color(0xff43CFBC),
                                   fontSize: 72,
@@ -154,10 +156,8 @@ class IndicatorProfile extends StatelessWidget {
                                 backgroundColor: const Color(0xff5ab2b1),
                                 //TODO: Increasing MAX value
                                 onPressed: () {
-                                  var temp = tempprovider.tempValueMax;
-                                  temp++;
-                                  print(temp);
-                                  tempprovider.increValueMax(temp);
+                                  setState(() => widget.maxIncre());
+                                  debugPrint(widget.maxValue.toString());
                                   // debugPrint("$max");
                                 },
                                 child: const Center(
@@ -214,8 +214,8 @@ class IndicatorProfile extends StatelessWidget {
                               backgroundColor: const Color(0xff5ab2b1),
                               //TODO: Increase MIN value
                               onPressed: () {
-                                tempprovider.increValueMin();
-                                // debugPrint("$min");
+                                setState(() => widget.minIncre());
+                                debugPrint(widget.minValue.toString());
                               },
                               child: const Center(
                                 child: AutoSizeText(
@@ -237,7 +237,7 @@ class IndicatorProfile extends StatelessWidget {
                             alignment: Alignment.center,
                             padding: const EdgeInsets.all(5),
                             child: AutoSizeText(
-                              '${tempprovider.tempValueMin}',
+                              widget.minValue.toString(),
                               style: const TextStyle(
                                   color: Color(0xff43CFBC),
                                   fontSize: 72,
@@ -258,8 +258,8 @@ class IndicatorProfile extends StatelessWidget {
                                 backgroundColor: const Color(0xff5ab2b1),
                                 //TODO: Decrease MIN value
                                 onPressed: () {
-                                  tempprovider.decreValueMin();
-                                  // debugPrint("$min");
+                                  setState(() => widget.minDecre());
+                                  debugPrint(widget.minValue.toString());
                                 },
                                 child: const Center(
                                   child: AutoSizeText(
@@ -335,6 +335,37 @@ class IndicatorProfile extends StatelessWidget {
                         onPressed: () {
                           // provider.localAlarmUpdate(
                           //     identifier, max, min);
+                          // switch (widget.identifier) {
+                          //   case 1:
+                          //     tempprovider.setValue(
+                          //         provider.prmax, provider.prmin);
+                          //     break;
+                          //   case 2:
+                          //     tempprovider.setValue(
+                          //         provider.spo2max, provider.spo2min);
+                          //     break;
+                          //   case 3:
+                          //     tempprovider.setValue(
+                          //         provider.pipmax, provider.pipmin);
+                          //     break;
+                          //   case 4:
+                          //     tempprovider.setValue(
+                          //         provider.peepmax, provider.peepmin);
+                          //     break;
+                          //   case 11:
+                          //     tempprovider.setValue(
+                          //         provider.sysmax, provider.sysmin);
+                          //     break;
+                          //   case 12:
+                          //     tempprovider.setValue(
+                          //         provider.diamax, provider.diamin);
+                          //     break;
+                          // }
+                          provider.localAlarmUpdate(
+                            widget.identifier,
+                            widget.maxValue,
+                            widget.minValue,
+                          );
                           provider.updateAlarmWhich(0);
                         },
                         color: const Color(0xff4caf50),

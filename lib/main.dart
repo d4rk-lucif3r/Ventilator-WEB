@@ -2,10 +2,11 @@ import 'dart:io';
 import 'package:ventilator_ui/connect/realtimefetch.dart';
 import 'package:flutter/material.dart';
 import 'package:ventilator_ui/connect/services.dart';
+import 'package:ventilator_ui/login/loginpage.dart';
 
 import 'home/display.dart';
 
-void main() async {
+void main() {
   // List<dynamic> data = await fetchData("data?stream=1");
   // print(data[0]['6'].toString());
   // print(data[0].toString());
