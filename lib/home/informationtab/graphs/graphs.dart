@@ -34,7 +34,7 @@ class Graphs extends StatelessWidget {
       margin: const EdgeInsets.only(
         top: 5,
         left: 20,
-        right: 10,
+        right: 20,
         bottom: 10,
       ),
       color: Colors.transparent,

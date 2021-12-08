@@ -313,7 +313,7 @@ class _IndicatorProfileState extends State<IndicatorProfile> {
                             'Discard',
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 20,
+                              fontSize: 16,
                               fontWeight: FontWeight.w400,
                             ),
                           ),
@@ -380,7 +380,7 @@ class _IndicatorProfileState extends State<IndicatorProfile> {
                             'Save',
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 20,
+                              fontSize: 16,
                               fontWeight: FontWeight.w400,
                             ),
                           ),

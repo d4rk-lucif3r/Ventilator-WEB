@@ -111,6 +111,13 @@ flutter:
         - asset: 'assets\fonts\lora\static\Lora-SemiBold.ttf'
         - asset: 'assets\fonts\lora\static\Lora-SemiBoldItalic.ttf'
 
+    - family: Candara
+      fonts:
+        - asset: 'assets\fonts\candara\Candara_Bold_Italic.ttf'
+        - asset: 'assets\fonts\candara\Candara_Bold.ttf'
+        - asset: 'assets\fonts\candara\Candara_Italic.ttf'
+        - asset: 'assets\fonts\candara\Candara.ttf'
+
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf

@@ -1,8 +1,6 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:ventilator_ui/connect/alarmsync.dart';
-import 'package:ventilator_ui/constants/constant.dart';
 import 'package:ventilator_ui/home/informationtab/profile/patient_profile.dart';
 import 'package:provider/provider.dart';
 import 'indicator_profile.dart';
@@ -80,8 +78,6 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
-    var isPRopened = true;
-
     // print("Local widget width: $w and height: $h");
 
     return Consumer<AlarmSync>(
@@ -115,16 +111,30 @@ class _ProfileState extends State<Profile> {
                 ),
               ],
             ),
-            child: AnimatedSwitcher(
-              duration: const Duration(milliseconds: 100),
-              child: _widgetRenderer(provider.isWhichSwitch, provider),
-              // isWhichSwitch == 'default'
-              //     ? PatientProfile()
-              //     : IndicatorProfile(
-              //         valueText: 100,
-              //         firstText: alarmName[isWhichSwitch][0],
-              //         subscriptText: alarmName[isWhichSwitch][1],
-              //       ),
+            child: ClipRRect(
+              child: AnimatedSwitcher(
+                duration: const Duration(milliseconds: 600),
+                switchInCurve: Curves.bounceIn,
+                switchOutCurve: Curves.linear,
+                transitionBuilder: (Widget child, Animation<double> animation) {
+                  final offsetAnimation = Tween<Offset>(
+                    begin: const Offset(1.0, 0.0),
+                    end: const Offset(0.0, 0.0),
+                  ).animate(animation);
+                  return SlideTransition(
+                    position: offsetAnimation,
+                    child: child,
+                  );
+                },
+                child: _widgetRenderer(provider.isWhichSwitch, provider),
+                // isWhichSwitch == 'default'
+                //     ? PatientProfile()
+                //     : IndicatorProfile(
+                //         valueText: 100,
+                //         firstText: alarmName[isWhichSwitch][0],
+                //         subscriptText: alarmName[isWhichSwitch][1],
+                //       ),
+              ),
             ),
           ),
         );

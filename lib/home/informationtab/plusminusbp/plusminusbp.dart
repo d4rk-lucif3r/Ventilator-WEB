@@ -24,8 +24,8 @@ class PlusMinusBP extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.only(
           top: 5,
-          right: 15,
-          left: 10,
+          right: 10,
+          left: 20,
           bottom: 10,
         ),
         color: Colors.transparent,
@@ -48,74 +48,82 @@ class PlusMinusBP extends StatelessWidget {
         child: Column(
           children: [
             Expanded(
-              flex: 3,
-              child: Container(
-                margin: const EdgeInsets.only(
-                  bottom: 2,
-                ),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 40,
-                  vertical: 10,
-                ),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Colors.black45,
-                      blurRadius: 2,
-                      offset: Offset(4, 4),
+              flex: 4,
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  var ww = constraints.maxWidth;
+                  return Container(
+                    margin: const EdgeInsets.only(
+                      bottom: 0,
+                      right: 0,
                     ),
-                    BoxShadow(
-                      color: Colors.black26,
-                      blurRadius: 1,
-                      offset: Offset(-1, -1),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: ww * .05,
+                      vertical: 5,
                     ),
-                  ],
-                ),
-                child: Column(
-                  children: [
-                    const PusMinusCard(
-                      firstText: 'VT',
-                      valueText: 'vt',
-                      subscriptText: '',
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Colors.black45,
+                          blurRadius: 2,
+                          offset: Offset(4, 4),
+                        ),
+                        BoxShadow(
+                          color: Colors.black26,
+                          blurRadius: 1,
+                          offset: Offset(-1, -1),
+                        ),
+                      ],
                     ),
-                    SizedBox(
-                      height: .7,
-                      child: Container(
-                        color: Colors.black,
-                      ),
+                    child: Column(
+                      children: [
+                        const PusMinusCard(
+                          firstText: 'VT',
+                          valueText: 'vt',
+                          subscriptText: '',
+                        ),
+                        SizedBox(
+                          height: .7,
+                          width: ww * .7,
+                          child: Container(
+                            color: Colors.black,
+                          ),
+                        ),
+                        const PusMinusCard(
+                          firstText: 'RR',
+                          valueText: 'rr',
+                          subscriptText: '',
+                        ),
+                        SizedBox(
+                          height: .7,
+                          width: ww * .7,
+                          child: Container(
+                            color: Colors.black,
+                          ),
+                        ),
+                        const PusMinusCard(
+                          firstText: 'FiO',
+                          valueText: 'fio2',
+                          subscriptText: '2',
+                        ),
+                      ],
                     ),
-                    const PusMinusCard(
-                      firstText: 'RR',
-                      valueText: 'rr',
-                      subscriptText: '',
-                    ),
-                    SizedBox(
-                      height: .7,
-                      child: Container(
-                        color: Colors.black,
-                      ),
-                    ),
-                    const PusMinusCard(
-                      firstText: 'FiO',
-                      valueText: 'fio2',
-                      subscriptText: '2',
-                    ),
-                  ],
-                ),
+                  );
+                },
               ),
             ),
             Consumer<RealTimeClass>(builder: (context, provider, child) {
               return Expanded(
-                flex: 1,
+                flex: 2,
                 child: Container(
                   margin: const EdgeInsets.only(
                     top: 10,
                   ),
                   padding: const EdgeInsets.symmetric(
-                    horizontal: 10,
-                    vertical: 10,
+                    horizontal: 0,
+                    vertical: 5,
                   ),
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
@@ -135,28 +143,57 @@ class PlusMinusBP extends StatelessWidget {
                       ),
                     ],
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                  child: Column(
                     children: [
                       Expanded(
+                        flex: 1,
                         child: BPCard(
-                          firstText: 'SYS',
-                          valueText: provider.sys,
-                          constValue: 11,
+                          firstText: 'BP',
+                          valueText: ((int.parse(provider.sys) +
+                                      int.parse(provider.dia)) /
+                                  2)
+                              .toString(),
+                          constValue: 10,
                         ),
                       ),
                       SizedBox(
-                        width: .6,
-                        child: Container(
-                          color: Colors.black,
+                        height: 5,
+                        child: Center(
+                          child: Container(
+                            margin: const EdgeInsets.symmetric(horizontal: 45),
+                            height: .6,
+                            width: double.infinity,
+                            color: Colors.black,
+                          ),
                         ),
                       ),
                       Expanded(
-                        child: BPCard(
-                          firstText: 'DIA',
-                          valueText: provider.dia,
-                          constValue: 12,
+                        flex: 1,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: BPCard(
+                                firstText: 'SYS',
+                                valueText: provider.sys,
+                                constValue: 11,
+                              ),
+                            ),
+                            SizedBox(
+                              width: .6,
+                              child: Container(
+                                color: Colors.black,
+                              ),
+                            ),
+                            Expanded(
+                              child: BPCard(
+                                firstText: 'DIA',
+                                valueText: provider.dia,
+                                constValue: 12,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ],
@@ -189,14 +226,15 @@ class PusMinusCard extends StatelessWidget {
       child: Consumer<PlusMinusProvider>(
         builder: (context, provider, child) {
           return Container(
+            color: Colors.transparent,
             padding: const EdgeInsets.symmetric(
-              horizontal: 5,
+              horizontal: 10,
               vertical: 10,
             ),
             child: Column(
               children: [
                 Expanded(
-                  flex: 3,
+                  flex: 1,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
                       vertical: 5,
@@ -210,7 +248,7 @@ class PusMinusCard extends StatelessWidget {
                               TextSpan(
                                 text: firstText,
                                 style: const TextStyle(
-                                  fontSize: 20,
+                                  fontSize: 14,
                                   color: Colors.black,
                                   fontWeight: FontWeight.w600,
                                 ),
@@ -219,7 +257,7 @@ class PusMinusCard extends StatelessWidget {
                                   ? TextSpan(
                                       text: subscriptText,
                                       style: const TextStyle(
-                                        fontSize: 9,
+                                        fontSize: 6,
                                         color: Colors.black,
                                         fontWeight: FontWeight.w800,
                                         fontFeatures: [
@@ -242,7 +280,7 @@ class PusMinusCard extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                  flex: 6,
+                  flex: 5,
                   child: Container(
                     child: Row(
                       children: [
@@ -250,7 +288,7 @@ class PusMinusCard extends StatelessWidget {
                           flex: 1,
                           child: Container(
                             alignment: Alignment.centerRight,
-                            padding: const EdgeInsets.all(5),
+                            padding: const EdgeInsets.all(0),
                             child: FloatingActionButton(
                               // foregroundColor: const Color(0xff7effee),
                               // backgroundColor: const Color(0xff43CFBC),
@@ -270,21 +308,22 @@ class PusMinusCard extends StatelessWidget {
                                 }
                               },
                               child: const Center(
-                                child: AutoSizeText(
-                                  '—',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 52,
+                                child: Padding(
+                                  padding: EdgeInsets.all(5),
+                                  child: Text(
+                                    '—',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 24,
+                                    ),
                                   ),
-                                  minFontSize: 12,
-                                  maxLines: 1,
                                 ),
                               ),
                             ),
                           ),
                         ),
                         Expanded(
-                          flex: 1,
+                          flex: 4,
                           child: Container(
                             alignment: Alignment.center,
                             padding: const EdgeInsets.all(5),
@@ -297,9 +336,9 @@ class PusMinusCard extends StatelessWidget {
                               style: const TextStyle(
                                   color: Color(0xff43CFBC),
                                   fontSize: 72,
-                                  fontWeight: FontWeight.w400,
+                                  fontWeight: FontWeight.normal,
                                   fontFamily: 'Bahnschrift'),
-                              minFontSize: 12,
+                              minFontSize: 16,
                               maxLines: 1,
                             ),
                           ),
@@ -308,7 +347,7 @@ class PusMinusCard extends StatelessWidget {
                           flex: 1,
                           child: Container(
                             alignment: Alignment.centerLeft,
-                            padding: const EdgeInsets.all(5),
+                            padding: const EdgeInsets.all(0),
                             child: FloatingActionButton(
                                 // backgroundColor: const Color(0xff43CFBC),
                                 backgroundColor: const Color(0xff5ab2b1),
@@ -325,14 +364,15 @@ class PusMinusCard extends StatelessWidget {
                                   }
                                 },
                                 child: const Center(
-                                  child: AutoSizeText(
-                                    '+',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 52,
+                                  child: Padding(
+                                    padding: EdgeInsets.all(5),
+                                    child: Text(
+                                      '+',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 24,
+                                      ),
                                     ),
-                                    minFontSize: 12,
-                                    maxLines: 1,
                                   ),
                                 )),
                           ),
