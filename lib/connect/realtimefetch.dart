@@ -43,25 +43,25 @@ class RealTimeClass extends ChangeNotifier {
   void updateStreamedData(Timer timer) async {
     // print('Hello');
     // while (true) {
-    List<dynamic> streamData = await fetchData("data?stream=1");
+    // List<dynamic> streamData = await fetchData("data?stream=1");
 
-    _pr = streamData[0]['1'].toString();
-    _spo2 = streamData[0]['2'].toString();
-    _pip = streamData[0]['3'].toString();
-    _peep = streamData[0]['4'].toString();
-    _i_e = streamData[0]['5'].toString();
-    _sys = streamData[0]['8'].toString();
-    _dia = streamData[0]['9'].toString();
-    _ecg1 = streamData[0]['6'];
+    // _pr = streamData[0]['1'].toString();
+    // _spo2 = streamData[0]['2'].toString();
+    // _pip = streamData[0]['3'].toString();
+    // _peep = streamData[0]['4'].toString();
+    // _i_e = streamData[0]['5'].toString();
+    // _sys = streamData[0]['8'].toString();
+    // _dia = streamData[0]['9'].toString();
+    // _ecg1 = streamData[0]['6'];
     // await Future.delayed(const Duration(milliseconds: 3000));
-    // _pr = _getRandomDouble(60, 150).toString();
-    // _spo2 = _getRandomDouble(60, 150).toString();
-    // _pip = _getRandomDouble(60, 150).toString();
-    // _peep = _getRandomDouble(60, 150).toString();
-    // _i_e = _getRandomDouble(11, 16).toString();
-    // _dia = _getRandomDouble(60, 150).toString();
-    // _sys = _getRandomDouble(60, 150).toString();
-    // _ecg1 = _getRandomDouble(60, 150);
+    _pr = _getRandomDouble(60, 150).toString();
+    _spo2 = _getRandomDouble(60, 150).toString();
+    _pip = _getRandomDouble(60, 150).toString();
+    _peep = _getRandomDouble(60, 150).toString();
+    _i_e = _getRandomDouble(11, 16).toString();
+    _dia = _getRandomDouble(60, 150).toString();
+    _sys = _getRandomDouble(60, 150).toString();
+    _ecg1 = _getRandomDouble(60, 150);
 
     notifyListeners();
 

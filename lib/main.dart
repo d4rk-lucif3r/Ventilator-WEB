@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:ventilator_ui/connect/services.dart';
 import 'package:ventilator_ui/dispose/graph_test.dart';
 import 'package:ventilator_ui/login/loginpage.dart';
-import 'dispose/graph-algo-test.dart';
+import 'dispose/spo2_development/graph-algo-test.dart';
 import 'home/display.dart';
 
 void main() {
@@ -24,7 +24,7 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: GraphTest(),
+      home: Display(),
       debugShowCheckedModeBanner: false,
     );
   }

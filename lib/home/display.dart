@@ -26,6 +26,7 @@ class Display extends StatefulWidget {
 
 class _DisplayState extends State<Display> {
   late Timer timer;
+  late Timer timerGraph;
   // late Timer timertwo;
   var count = 0;
   Duration duration = const Duration(milliseconds: 100);
@@ -131,6 +132,19 @@ class _DisplayState extends State<Display> {
             },
           );
         });
+        timerGraph = Timer.periodic(
+          duration,
+          (timer) => setState(
+            () {
+              providerecg1.getChartData(timer);
+              providerecg2.getChartData(timer);
+              providerecg3.getChartData(timer);
+              providerecg4.getChartData(timer);
+              // debugPrint(count.toString());
+              timer.cancel();
+            },
+          ),
+        );
 
         // timertwo = Timer.periodic(
         //   duration,
