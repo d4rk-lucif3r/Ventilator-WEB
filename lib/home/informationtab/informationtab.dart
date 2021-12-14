@@ -65,33 +65,34 @@ class _InformationTabState extends State<InformationTab> {
             decoration: const BoxDecoration(
               // color: Color(0xffd0ffff),
               // color: Colors.white,
-              color: Color(0xffECF2FE),
+              // color: Color(0xffECF2FE),
               //d4ffdf
+              color: Color(0xffb3e5fc),
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(10),
                 bottomRight: Radius.circular(10),
               ),
-              // boxShadow: [
-              //   BoxShadow(
-              //     color: Colors.black45,
-              //     blurRadius: 2,
-              //     offset: Offset(4, 4),
-              //   ),
-              //   BoxShadow(
-              //     color: Colors.black26,
-              //     blurRadius: 1,
-              //     offset: Offset(-1, -1),
-              //   ),
-              // ],
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black45,
+                  blurRadius: 2,
+                  offset: Offset(4, 4),
+                ),
+                BoxShadow(
+                  color: Colors.black26,
+                  blurRadius: 2,
+                  offset: Offset(-2, -2),
+                ),
+              ],
             ),
             child: Column(
               children: [
                 const SizedBox(
-                  height: 20,
+                  height: 5,
                 ),
                 //TODO: Indicator White
                 const Expanded(
-                  flex: 5,
+                  flex: 2,
                   child: Indicators(),
                 ),
                 SizedBox(
@@ -101,7 +102,7 @@ class _InformationTabState extends State<InformationTab> {
                   ),
                 ),
                 Expanded(
-                  flex: 20,
+                  flex: 9,
                   child: Container(
                     color: Colors.transparent,
                     child: Row(

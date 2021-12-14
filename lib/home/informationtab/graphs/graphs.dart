@@ -30,6 +30,8 @@ class Graphs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // var w = MediaQuery.of(context).size.width;
+    var h = MediaQuery.of(context).size.height;
     return Container(
       margin: const EdgeInsets.only(
         top: 5,
@@ -64,7 +66,7 @@ class Graphs extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 10,
+            height: h / 60,
           ),
           Expanded(
             flex: 1,
@@ -74,7 +76,7 @@ class Graphs extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 10,
+            height: h / 60,
           ),
           Expanded(
             flex: 1,
@@ -84,7 +86,7 @@ class Graphs extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 10,
+            height: h / 60,
           ),
           Expanded(
             flex: 1,

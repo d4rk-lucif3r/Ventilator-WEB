@@ -87,64 +87,64 @@ class _DisplayState extends State<Display> {
       child: Consumer6<RealTimeClass, RealTimeGraph, ECG1, ECG2, ECG3, ECG4>(
           builder: (context, provider, providerg, providerecg1, providerecg2,
               providerecg3, providerecg4, child) {
-        timer = Timer.periodic(duration, (timer) {
-          provider.updateStreamedData(timer);
-          setState(
-            () {
-              debugPrint("Before Counting : $count\n");
-              if (count >= 29) {
-                duration = const Duration(milliseconds: 500);
-                debugPrint("$duration");
+        // timer = Timer.periodic(duration, (timer) {
+        //   provider.updateStreamedData(timer);
+        //   setState(
+        //     () {
+        //       debugPrint("Before Counting : $count\n");
+        //       if (count >= 29) {
+        //         duration = const Duration(milliseconds: 500);
+        //         debugPrint("$duration");
 
-                if (count >= 59) {
-                  if (count % 10 == 0) {
-                    // debugPrint("Graphs");
-                    debugPrint("Greater than 59");
-                    providerecg1.getChartData(timer);
-                    providerecg2.getChartData(timer);
-                    providerecg3.getChartData(timer);
-                    providerecg4.getChartData(timer);
-                  }
-                } else if (count < 59) {
-                  if (count % 2 == 0) {
-                    // debugPrint("Graphs");
-                    debugPrint("Lesser than 59");
-                    providerecg1.getChartData(timer);
-                    providerecg2.getChartData(timer);
-                    providerecg3.getChartData(timer);
-                    providerecg4.getChartData(timer);
-                  }
-                }
-                count++;
-              } else {
-                // debugPrint("Graphs");
-                debugPrint("Lesser than 29");
-                providerecg1.getChartData(timer);
-                providerecg2.getChartData(timer);
-                providerecg3.getChartData(timer);
-                providerecg4.getChartData(timer);
-                count++;
-              }
+        //         if (count >= 59) {
+        //           if (count % 10 == 0) {
+        //             // debugPrint("Graphs");
+        //             debugPrint("Greater than 59");
+        //             providerecg1.getChartData(timer);
+        //             providerecg2.getChartData(timer);
+        //             providerecg3.getChartData(timer);
+        //             providerecg4.getChartData(timer);
+        //           }
+        //         } else if (count < 59) {
+        //           if (count % 2 == 0) {
+        //             // debugPrint("Graphs");
+        //             debugPrint("Lesser than 59");
+        //             providerecg1.getChartData(timer);
+        //             providerecg2.getChartData(timer);
+        //             providerecg3.getChartData(timer);
+        //             providerecg4.getChartData(timer);
+        //           }
+        //         }
+        //         count++;
+        //       } else {
+        //         // debugPrint("Graphs");
+        //         debugPrint("Lesser than 29");
+        //         providerecg1.getChartData(timer);
+        //         providerecg2.getChartData(timer);
+        //         providerecg3.getChartData(timer);
+        //         providerecg4.getChartData(timer);
+        //         count++;
+        //       }
 
-              // debugPrint("Realtime");
+        //       // debugPrint("Realtime");
 
-              debugPrint("After Counting : $count");
-            },
-          );
-        });
-        timerGraph = Timer.periodic(
-          duration,
-          (timer) => setState(
-            () {
-              providerecg1.getChartData(timer);
-              providerecg2.getChartData(timer);
-              providerecg3.getChartData(timer);
-              providerecg4.getChartData(timer);
-              // debugPrint(count.toString());
-              timer.cancel();
-            },
-          ),
-        );
+        //       debugPrint("After Counting : $count");
+        //     },
+        //   );
+        // });
+        // timerGraph = Timer.periodic(
+        //   duration,
+        //   (timer) => setState(
+        //     () {
+        //       providerecg1.getChartData(timer);
+        //       providerecg2.getChartData(timer);
+        //       providerecg3.getChartData(timer);
+        //       providerecg4.getChartData(timer);
+        //       // debugPrint(count.toString());
+        //       timer.cancel();
+        //     },
+        //   ),
+        // );
 
         // timertwo = Timer.periodic(
         //   duration,
@@ -194,7 +194,7 @@ class _DisplayState extends State<Display> {
             height: double.maxFinite,
             // margin: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: const Color(0xffd0ffff),
               // gradient: LinearGradient(
               //   begin: Alignment.topCenter,
               //   end: Alignment.bottomCenter,
@@ -299,18 +299,19 @@ class _DisplayState extends State<Display> {
                                   child: Column(
                                     children: [
                                       SizedBox(
-                                        height: 40,
+                                        height: 60,
                                         width: double.infinity,
                                         child: Container(
-                                            alignment: Alignment.center,
-                                            child: const Text(
-                                              'VENTO MONITOR',
-                                              style: TextStyle(
-                                                fontFamily: 'Candara',
-                                                fontSize: 32,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            )),
+                                          alignment: Alignment.center,
+                                          child: const Text(
+                                            'VENTO MONITOR',
+                                            style: TextStyle(
+                                              fontFamily: 'Candara',
+                                              fontSize: 48,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ),
                                       ),
 
                                       //TODO: NavBar
@@ -319,7 +320,7 @@ class _DisplayState extends State<Display> {
                                         child: NavBar(),
                                       ),
                                       SizedBox(
-                                        height: 10,
+                                        height: 5,
                                         child: Container(
                                           color: Colors.transparent,
                                         ),

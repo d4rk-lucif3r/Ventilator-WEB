@@ -17,6 +17,9 @@ class PlusMinusBP extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var h = MediaQuery.of(context).size.height;
+    debugPrint("$h");
+
     return DefaultTextStyle(
       style: const TextStyle(
         inherit: false,
@@ -114,13 +117,16 @@ class PlusMinusBP extends StatelessWidget {
                 },
               ),
             ),
+            SizedBox(
+              height: h / 60,
+            ),
             Consumer<RealTimeClass>(builder: (context, provider, child) {
               return Expanded(
                 flex: 2,
                 child: Container(
-                  margin: const EdgeInsets.only(
-                    top: 10,
-                  ),
+                  // margin: const EdgeInsets.only(
+                  //   top: 10,
+                  // ),
                   padding: const EdgeInsets.symmetric(
                     horizontal: 0,
                     vertical: 5,
@@ -227,9 +233,11 @@ class PusMinusCard extends StatelessWidget {
         builder: (context, provider, child) {
           return Container(
             color: Colors.transparent,
-            padding: const EdgeInsets.symmetric(
-              horizontal: 10,
-              vertical: 10,
+            padding: const EdgeInsets.only(
+              left: 10,
+              right: 10,
+              top: 10,
+              bottom: 5,
             ),
             child: Column(
               children: [
@@ -237,7 +245,7 @@ class PusMinusCard extends StatelessWidget {
                   flex: 1,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
-                      vertical: 5,
+                      vertical: 2,
                     ),
                     child: Wrap(
                       alignment: WrapAlignment.center,
@@ -248,7 +256,7 @@ class PusMinusCard extends StatelessWidget {
                               TextSpan(
                                 text: firstText,
                                 style: const TextStyle(
-                                  fontSize: 14,
+                                  fontSize: 16,
                                   color: Colors.black,
                                   fontWeight: FontWeight.w600,
                                 ),
@@ -257,7 +265,7 @@ class PusMinusCard extends StatelessWidget {
                                   ? TextSpan(
                                       text: subscriptText,
                                       style: const TextStyle(
-                                        fontSize: 6,
+                                        fontSize: 7,
                                         color: Colors.black,
                                         fontWeight: FontWeight.w800,
                                         fontFeatures: [
@@ -280,7 +288,7 @@ class PusMinusCard extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                  flex: 5,
+                  flex: 3,
                   child: Container(
                     child: Row(
                       children: [
@@ -293,7 +301,8 @@ class PusMinusCard extends StatelessWidget {
                               // foregroundColor: const Color(0xff7effee),
                               // backgroundColor: const Color(0xff43CFBC),
                               // 5ab2b1
-                              backgroundColor: const Color(0xff5ab2b1),
+                              // backgroundColor: const Color(0xff5ab2b1),
+                              backgroundColor: const Color(0xff29abe2),
 
                               onPressed: () {
                                 switch (valueText) {
@@ -334,7 +343,7 @@ class PusMinusCard extends StatelessWidget {
                                       ? provider.rr.toString()
                                       : provider.fio2.toString(),
                               style: const TextStyle(
-                                  color: Color(0xff43CFBC),
+                                  color: Color(0xff29abe2),
                                   fontSize: 72,
                                   fontWeight: FontWeight.normal,
                                   fontFamily: 'Bahnschrift'),
@@ -350,7 +359,8 @@ class PusMinusCard extends StatelessWidget {
                             padding: const EdgeInsets.all(0),
                             child: FloatingActionButton(
                                 // backgroundColor: const Color(0xff43CFBC),
-                                backgroundColor: const Color(0xff5ab2b1),
+                                // backgroundColor: const Color(0xff5ab2b1),
+                                backgroundColor: const Color(0xff29abe2),
                                 onPressed: () {
                                   switch (valueText) {
                                     case "vt":

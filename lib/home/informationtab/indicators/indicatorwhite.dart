@@ -65,9 +65,11 @@ class _IndicatorWhiteState extends State<IndicatorWhite> {
                   horizontal: 10,
                   vertical: 2,
                 ),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 20,
-                  vertical: 10,
+                padding: const EdgeInsets.only(
+                  left: 20,
+                  right: 20,
+                  top: 10,
+                  bottom: 5,
                 ),
                 decoration: BoxDecoration(
                   // color: const Color(0xff3C3E95),
@@ -94,9 +96,10 @@ class _IndicatorWhiteState extends State<IndicatorWhite> {
                 child: Column(
                   children: [
                     Expanded(
-                      flex: 3,
+                      flex: 2,
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           RichText(
                             text: TextSpan(
@@ -106,16 +109,16 @@ class _IndicatorWhiteState extends State<IndicatorWhite> {
                                   style: const TextStyle(
                                     fontSize: 16,
                                     color: Colors.black,
-                                    fontWeight: FontWeight.w600,
+                                    fontWeight: FontWeight.normal,
                                   ),
                                 ),
                                 widget.subscriptText != null
                                     ? TextSpan(
                                         text: widget.subscriptText,
                                         style: const TextStyle(
-                                          fontSize: 7,
+                                          fontSize: 8,
                                           color: Colors.black,
-                                          fontWeight: FontWeight.w800,
+                                          fontWeight: FontWeight.w600,
                                           fontFeatures: [
                                             FontFeature.subscripts()
                                           ],
@@ -134,7 +137,7 @@ class _IndicatorWhiteState extends State<IndicatorWhite> {
                                         style: const TextStyle(
                                           fontSize: 16,
                                           color: Colors.black,
-                                          fontWeight: FontWeight.w600,
+                                          fontWeight: FontWeight.normal,
                                         ),
                                       )
                                     : const TextSpan(
@@ -147,46 +150,6 @@ class _IndicatorWhiteState extends State<IndicatorWhite> {
                               ],
                             ),
                           ),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      flex: 6,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          widget.numberText2 != null
-                              ? AutoSizeText(
-                                  "${widget.numberText1.toString()} : ${widget.numberText2.toString()}",
-                                  style: const TextStyle(
-                                      fontSize: 58,
-                                      color: Colors.red,
-                                      // color: Colors.black,
-                                      fontWeight: FontWeight.bold,
-                                      fontFamily: 'Bahnschrift'),
-                                  minFontSize: 16,
-                                  maxLines: 1,
-                                )
-                              : AutoSizeText(
-                                  widget.numberText1.toString(),
-                                  style: const TextStyle(
-                                    fontSize: 58,
-                                    color: Colors.red,
-                                    // color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: 'Bahnschrift',
-                                  ),
-                                  minFontSize: 16,
-                                  maxLines: 1,
-                                ),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      flex: 2,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
                           RichText(
                             text: TextSpan(
                               children: [
@@ -195,16 +158,16 @@ class _IndicatorWhiteState extends State<IndicatorWhite> {
                                   style: const TextStyle(
                                     fontSize: 16,
                                     color: Colors.black,
-                                    fontWeight: FontWeight.w500,
+                                    fontWeight: FontWeight.normal,
                                   ),
                                 ),
                                 widget.bottomSubscriptText != null
                                     ? TextSpan(
                                         text: widget.bottomSubscriptText,
                                         style: const TextStyle(
-                                          fontSize: 7,
+                                          fontSize: 8,
                                           color: Colors.black,
-                                          fontWeight: FontWeight.w700,
+                                          fontWeight: FontWeight.w600,
                                           fontFeatures: [
                                             FontFeature.subscripts()
                                           ],
@@ -223,7 +186,7 @@ class _IndicatorWhiteState extends State<IndicatorWhite> {
                                         style: const TextStyle(
                                           fontSize: 16,
                                           color: Colors.black,
-                                          fontWeight: FontWeight.w500,
+                                          fontWeight: FontWeight.normal,
                                         ),
                                       )
                                     : const TextSpan(
@@ -239,6 +202,48 @@ class _IndicatorWhiteState extends State<IndicatorWhite> {
                         ],
                       ),
                     ),
+                    Expanded(
+                      flex: 4,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          widget.numberText2 != null
+                              ? AutoSizeText(
+                                  "${widget.numberText1.toString()} : ${widget.numberText2.toString()}",
+                                  style: const TextStyle(
+                                      fontSize: 58,
+                                      color: Colors.red,
+                                      // color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Bahnschrift'),
+                                  minFontSize: 24,
+                                  maxLines: 1,
+                                )
+                              : AutoSizeText(
+                                  widget.numberText1.toString(),
+                                  style: const TextStyle(
+                                    fontSize: 58,
+                                    color: Colors.red,
+                                    // color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'Bahnschrift',
+                                  ),
+                                  minFontSize: 16,
+                                  maxLines: 1,
+                                ),
+                        ],
+                      ),
+                    ),
+                    // Expanded(
+                    //   flex: 2,
+                    //   child: Row(
+                    //     mainAxisAlignment: MainAxisAlignment.end,
+                    //     children: [
+
+                    //     ],
+                    //   ),
+                    // ),
                   ],
                 ),
               ),

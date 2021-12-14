@@ -27,25 +27,31 @@ class _NavBarState extends State<NavBar> {
           padding: const EdgeInsets.only(left: 10),
           decoration: const BoxDecoration(
             // color: Color(0xff81d4fa),
-            color: Color(0xffECF2FE),
+            // color: Color(0xffECF2FE),
+            color: Colors.white,
 
             //ccf4d7
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(10),
               topRight: Radius.circular(10),
             ),
-            // boxShadow: [
-            //   BoxShadow(
-            //     color: Colors.black45,
-            //     blurRadius: 2,
-            //     offset: Offset(4, 4),
-            //   ),
-            //   BoxShadow(
-            //     color: Colors.black26,
-            //     blurRadius: 1,
-            //     offset: Offset(-1, -1),
-            //   ),
-            // ],
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black45,
+                blurRadius: 4,
+                offset: Offset(4, 4),
+              ),
+              // BoxShadow(
+              //   color: Colors.black38,
+              //   blurRadius: 4,
+              //   offset: Offset(-2, 4),
+              // ),
+              BoxShadow(
+                color: Colors.black26,
+                blurRadius: 2,
+                offset: Offset(-2, -2),
+              ),
+            ],
           ),
           child: Row(
             children: [
