@@ -38,7 +38,9 @@ dependencies:
   provider: ^6.0.1
   http: ^0.13.3
   syncfusion_flutter_charts: ^19.3.45+1
-  google_maps_flutter_web: ^0.3.2
+  # google_maps_flutter_web: ^0.3.
+  # easy_web_view2: ^0.0.3
+  webviewx: ^0.2.1
 
 dev_dependencies:
   flutter_test:
