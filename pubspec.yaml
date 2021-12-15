@@ -41,6 +41,7 @@ dependencies:
   # google_maps_flutter_web: ^0.3.
   # easy_web_view2: ^0.0.3
   webviewx: ^0.2.1
+  google_maps:
 
 dev_dependencies:
   flutter_test:
