@@ -1,13 +1,17 @@
 import 'dart:async';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ventilator_ui/connect/alarmsync.dart';
 import 'package:ventilator_ui/connect/graph/chartsync.dart';
 import 'package:ventilator_ui/connect/login.dart';
+import 'package:ventilator_ui/connect/patientinfo.dart';
 import 'package:ventilator_ui/connect/plusminusprovider.dart';
 import 'package:ventilator_ui/connect/realtimefetch.dart';
 import 'package:ventilator_ui/connect/tempprovider.dart';
+import 'package:ventilator_ui/home/home_pop_up_stacks/patient_profile.dart';
+import 'package:ventilator_ui/ui_control_center/transition_manager.dart';
 import '../constants/constant.dart';
 import 'package:ventilator_ui/connect/graph/ecg_1_graph.dart';
 import 'package:ventilator_ui/connect/graph/ecg_2_graph.dart';
@@ -29,7 +33,14 @@ class _DisplayState extends State<Display> {
   late Timer timerGraph;
   // late Timer timertwo;
   var count = 0;
-  Duration duration = const Duration(milliseconds: 100);
+  Duration duration = const Duration(milliseconds: 10);
+  bool _isInfoActive = false;
+
+  void infoUpdate() {
+    setState(() {
+      _isInfoActive = !_isInfoActive;
+    });
+  }
 
   @override
   void initState() {
@@ -83,10 +94,17 @@ class _DisplayState extends State<Display> {
         ChangeNotifierProvider(
           create: (_) => ECG4(),
         ),
+        ChangeNotifierProvider(
+          create: (_) => TransitionManager(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => PatientInfo(),
+        ),
       ],
-      child: Consumer6<RealTimeClass, RealTimeGraph, ECG1, ECG2, ECG3, ECG4>(
-          builder: (context, provider, providerg, providerecg1, providerecg2,
+      child: Consumer6<RealTimeClass, PatientInfo, ECG1, ECG2, ECG3, ECG4>(
+          builder: (context, provider, providerinfo, providerecg1, providerecg2,
               providerecg3, providerecg4, child) {
+        providerinfo.getPatientData();
         // timer = Timer.periodic(duration, (timer) {
         //   provider.updateStreamedData(timer);
         //   setState(
@@ -95,7 +113,6 @@ class _DisplayState extends State<Display> {
         //       if (count >= 29) {
         //         duration = const Duration(milliseconds: 500);
         //         debugPrint("$duration");
-
         //         if (count >= 59) {
         //           if (count % 10 == 0) {
         //             // debugPrint("Graphs");
@@ -125,9 +142,7 @@ class _DisplayState extends State<Display> {
         //         providerecg4.getChartData(timer);
         //         count++;
         //       }
-
         //       // debugPrint("Realtime");
-
         //       debugPrint("After Counting : $count");
         //     },
         //   );
@@ -136,16 +151,15 @@ class _DisplayState extends State<Display> {
         //   duration,
         //   (timer) => setState(
         //     () {
-        //       providerecg1.getChartData(timer);
-        //       providerecg2.getChartData(timer);
+        //       // providerecg1.getChartData(timer);
+        //       // providerecg2.getChartData(timer);
         //       providerecg3.getChartData(timer);
-        //       providerecg4.getChartData(timer);
+        //       // providerecg4.getChartData(timer);
         //       // debugPrint(count.toString());
         //       timer.cancel();
         //     },
         //   ),
         // );
-
         // timertwo = Timer.periodic(
         //   duration,
         //   (timertwo) => setState(
@@ -155,7 +169,6 @@ class _DisplayState extends State<Display> {
         //       // :
         //       if (count >= 29) duration = const Duration(seconds: 1);
         //       if (count >= 59) duration = const Duration(seconds: 5);
-
         //       debugPrint("Graphs");
         //       providerecg1.getChartData(timertwo);
         //       providerecg2.getChartData(timertwo);
@@ -163,7 +176,6 @@ class _DisplayState extends State<Display> {
         //       providerecg4.getChartData(timertwo);
         //       count++;
         //       // debugPrint(count.toString());
-
         //       // timer.cancel();
         //     },
         //   ),
@@ -179,11 +191,9 @@ class _DisplayState extends State<Display> {
         //   if (snapshot.connectionState == ConnectionState.waiting) {
         //     debugPrint("Waiting");
         //   }
-
         //   if (snapshot.connectionState == ConnectionState.active) {
         //     debugPrint("Active");
         //   }
-
         //   if (snapshot.connectionState == ConnectionState.done) {
         //     debugPrint("Done");
         //   }
@@ -315,38 +325,293 @@ class _DisplayState extends State<Display> {
                                       ),
 
                                       //TODO: NavBar
-                                      const Expanded(
-                                        flex: 1,
-                                        child: NavBar(),
-                                      ),
-                                      SizedBox(
-                                        height: 5,
-                                        child: Container(
-                                          color: Colors.transparent,
+                                      Expanded(
+                                        flex: 3,
+                                        child: Consumer<TempProvider>(
+                                          builder:
+                                              (context, tempprovider, child) {
+                                            return Container(
+                                              margin:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 5),
+                                              padding: const EdgeInsets.only(
+                                                  left: 10),
+                                              decoration: const BoxDecoration(
+                                                // color: Color(0xff81d4fa),
+                                                // color: Color(0xffECF2FE),
+                                                color: Colors.white,
+
+                                                //ccf4d7
+                                                borderRadius: BorderRadius.only(
+                                                  topLeft: Radius.circular(10),
+                                                  topRight: Radius.circular(10),
+                                                ),
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.black45,
+                                                    blurRadius: 4,
+                                                    offset: Offset(4, 4),
+                                                  ),
+                                                  // BoxShadow(
+                                                  //   color: Colors.black38,
+                                                  //   blurRadius: 4,
+                                                  //   offset: Offset(-2, 4),
+                                                  // ),
+                                                  BoxShadow(
+                                                    color: Colors.black26,
+                                                    blurRadius: 2,
+                                                    offset: Offset(-2, -2),
+                                                  ),
+                                                ],
+                                              ),
+                                              child: GestureDetector(
+                                                onTap: () {
+                                                  infoUpdate();
+                                                  debugPrint("$_isInfoActive");
+                                                },
+                                                child: Row(
+                                                  children: [
+                                                    Expanded(
+                                                      flex: 1,
+                                                      child: Container(
+                                                        alignment: Alignment
+                                                            .centerLeft,
+                                                        color:
+                                                            Colors.transparent,
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .start,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            AspectRatio(
+                                                              aspectRatio: 1,
+                                                              child: Icon(
+                                                                Icons.person,
+                                                                size: 36,
+                                                                color: Colors
+                                                                    .black,
+                                                              ),
+                                                            ),
+                                                            Column(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .center,
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Text(
+                                                                  '${providerinfo.name}',
+                                                                  style:
+                                                                      TextStyle(
+                                                                    color: Colors
+                                                                        .black,
+                                                                    fontSize:
+                                                                        16,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                    overflow:
+                                                                        TextOverflow
+                                                                            .ellipsis,
+                                                                  ),
+                                                                ),
+                                                                Text(
+                                                                  '${providerinfo.age}, ${providerinfo.sex}',
+                                                                  style:
+                                                                      TextStyle(
+                                                                    color: Colors
+                                                                        .black,
+                                                                    fontSize:
+                                                                        16,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                    overflow:
+                                                                        TextOverflow
+                                                                            .ellipsis,
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Expanded(
+                                                      flex: 2,
+                                                      child: Container(
+                                                        color:
+                                                            Colors.transparent,
+                                                      ),
+                                                    ),
+                                                    Expanded(
+                                                      flex: 1,
+                                                      child: Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .end,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          AutoSizeText(
+                                                            'Badli Road, Gurugram, 122505',
+                                                            style: TextStyle(
+                                                              color:
+                                                                  Colors.black,
+                                                              fontSize: 18,
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .ellipsis,
+                                                            ),
+                                                            minFontSize: 12,
+                                                            maxLines: 1,
+                                                          ),
+                                                          SizedBox(
+                                                            width: 10,
+                                                          ),
+                                                          Icon(
+                                                            Icons.location_on,
+                                                            size: 26,
+                                                            color: Colors.red,
+                                                          ),
+                                                          SizedBox(
+                                                            width: 20,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            );
+                                          },
                                         ),
                                       ),
 
-                                      //TODO: InformationTab
+//=============================================================================================
+/////////////////////////////////////////////////////////////////////////////////////////////
                                       Expanded(
-                                        flex: 10,
-                                        child: InformationTab(
-                                          providerg: providerg,
-                                          providerecg1: providerecg1,
-                                          providerecg2: providerecg2,
-                                          providerecg3: providerecg3,
-                                          providerecg4: providerecg4,
-                                        ),
-                                      ),
+                                          flex: 26,
+                                          child: Container(
+                                            color: Colors.lime,
+                                            child: LayoutBuilder(
+                                              builder: (context, constraints) {
+                                                var infWidth =
+                                                    constraints.maxWidth;
+                                                var infHeight =
+                                                    constraints.maxHeight;
+                                                return Stack(
+                                                  children: [
+                                                    SizedBox.expand(
+                                                      child: Column(
+                                                        children: [
+                                                          SizedBox(
+                                                            height: 5,
+                                                            child: Container(
+                                                              color: Colors
+                                                                  .transparent,
+                                                            ),
+                                                          ),
+
+                                                          //TODO: InformationTab
+                                                          Expanded(
+                                                            // flex: 10,
+                                                            child:
+                                                                InformationTab(
+                                                              // providerg:
+                                                              //     provider,
+                                                              providerecg1:
+                                                                  providerecg1,
+                                                              providerecg2:
+                                                                  providerecg2,
+                                                              providerecg3:
+                                                                  providerecg3,
+                                                              providerecg4:
+                                                                  providerecg4,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    Visibility(
+                                                      visible: _isInfoActive,
+                                                      child: Positioned(
+                                                        left: 10,
+                                                        child: Container(
+                                                          width: infWidth * .2,
+                                                          height:
+                                                              infHeight * .65,
+                                                          margin: EdgeInsets
+                                                              .symmetric(
+                                                            horizontal: 20,
+                                                          ),
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            color: Colors
+                                                                .yellowAccent,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .only(
+                                                              bottomLeft: Radius
+                                                                  .circular(10),
+                                                              bottomRight:
+                                                                  Radius
+                                                                      .circular(
+                                                                          10),
+                                                            ),
+                                                            boxShadow: [
+                                                              BoxShadow(
+                                                                offset: Offset(
+                                                                    0, 4),
+                                                                color: Colors
+                                                                    .black
+                                                                    .withOpacity(
+                                                                        .5),
+                                                                blurRadius: 4,
+                                                                spreadRadius: 0,
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          child: PatientProfile(
+                                                            pname: providerinfo
+                                                                .name,
+                                                            page: providerinfo
+                                                                .age,
+                                                            psex: providerinfo
+                                                                .sex,
+                                                            pheight:
+                                                                providerinfo
+                                                                    .height,
+                                                            pweight:
+                                                                providerinfo
+                                                                    .weight,
+                                                            pbloodGroup:
+                                                                providerinfo
+                                                                    .bloodGroup,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                );
+                                              },
+                                            ),
+                                          ))
                                     ],
                                   ),
                                 ),
                               ),
-                              AnimatedContainer(
-                                width: tempprovider.animatedWidth,
-                                curve: Curves.linearToEaseOut,
-                                duration: Duration(milliseconds: 1000),
-                                child: Settings(),
-                              ),
+                              // AnimatedContainer(
+                              //   width: tempprovider.animatedWidth,
+                              //   curve: Curves.linearToEaseOut,
+                              //   duration: Duration(milliseconds: 1000),
+                              //   child: Settings(),
+                              // ),
                             ],
                           ),
                         );

@@ -15,14 +15,14 @@ import 'ecg3.dart';
 class Graphs extends StatelessWidget {
   const Graphs({
     Key? key,
-    required this.providerg,
+    // required this.providerg,
     required this.providerecg1,
     required this.providerecg2,
     required this.providerecg3,
     required this.providerecg4,
   }) : super(key: key);
 
-  final RealTimeGraph providerg;
+  // final RealTimeGraph providerg;
   final ECG1 providerecg1;
   final ECG2 providerecg2;
   final ECG3 providerecg3;

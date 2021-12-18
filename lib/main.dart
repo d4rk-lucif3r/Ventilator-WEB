@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:ventilator_ui/connect/services.dart';
 import 'package:ventilator_ui/dispose/popup-dev-for-settings/popup_window.dart';
 import 'package:ventilator_ui/dispose/spo2_development/working/graph_test.dart';
+import 'package:ventilator_ui/home/display.dart';
 import 'package:ventilator_ui/login/loginpage.dart';
 import 'dispose/slider_test.dart';
 import 'dispose/spo2_development/working/graph-algo-test.dart';
@@ -33,7 +34,8 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: PopUpWindow(),
+      home:
+          DefaultTextStyle(style: TextStyle(inherit: false), child: Display()),
       debugShowCheckedModeBanner: false,
     );
   }

@@ -80,7 +80,7 @@ class _IndicatorsState extends State<Indicators> {
             IndicatorWhite(
               firstText: 'I:E',
               numberText1: provider.i_e.substring(0, 1),
-              numberText2: provider.i_e.substring(2),
+              numberText2: provider.i_e.substring(1),
               bottomFirstText: '',
               constValue: 100,
               maxValue: 100,

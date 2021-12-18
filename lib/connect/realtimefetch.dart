@@ -8,7 +8,7 @@ class RealTimeClass extends ChangeNotifier {
   late String _spo2 = '0';
   late String _pip = '0';
   late String _peep = '0';
-  late String _i_e = '0:0';
+  late String _i_e = '00';
   late String _dia = '0';
   late String _sys = '0';
   late double _ecg1 = 0.0;
