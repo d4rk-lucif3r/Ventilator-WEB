@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:google_maps/google_maps.dart';
 import 'package:ventilator_ui/connect/services.dart';
 
 class RealTimeClass extends ChangeNotifier {
@@ -18,6 +19,8 @@ class RealTimeClass extends ChangeNotifier {
   late bool _ispeepalarm = false;
   late bool _issysalarm = false;
   late bool _isdiaalarm = false;
+  final LatLng _lastUpdatedLocation =
+      LatLng(28.479261666666666, 76.90485166666667);
 
   String get pr => _pr;
   String get spo2 => _spo2;
@@ -33,6 +36,7 @@ class RealTimeClass extends ChangeNotifier {
   bool get ispeepalarm => _ispeepalarm;
   bool get issysalarm => _issysalarm;
   bool get isdiaalarm => _isdiaalarm;
+  LatLng get lastUpdatedLocation => _lastUpdatedLocation;
 
   // final StreamController _controller = StreamController();
 

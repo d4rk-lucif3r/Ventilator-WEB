@@ -4,17 +4,40 @@ import 'package:flutter/material.dart';
 import 'package:google_maps/google_maps.dart';
 import 'package:webviewx/webviewx.dart';
 
-const String link =
-    "https://maps.googleapis.com/maps/api/staticmap?center=&27.2046,77.4977&zoom=18&size=300x300&maptype=terrain&markers=color:red%7Clabel:A%7C27.2046,77.4977&key=AIzaSyA4GfqRu9YuT4CEUlsRZ54fMbtFRSsyReA";
+// const String link =
+//     "https://maps.googleapis.com/maps/api/staticmap?center=&27.2046,77.4977&zoom=18&size=300x300&maptype=terrain&markers=color:red%7Clabel:A%7C27.2046,77.4977&key=AIzaSyA4GfqRu9YuT4CEUlsRZ54fMbtFRSsyReA";
 
 class PopUpMapWindow extends StatefulWidget {
-  const PopUpMapWindow({Key? key}) : super(key: key);
+  PopUpMapWindow({
+    Key? key,
+    required this.getLatlng,
+  }) : super(key: key);
+
+  final LatLng getLatlng;
 
   @override
   _PopUpMapWindowState createState() => _PopUpMapWindowState();
 }
 
 class _PopUpMapWindowState extends State<PopUpMapWindow> {
+  late LatLng _latLng;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _latLng = widget.getLatlng;
+    debugPrint("Map Created");
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _latLng = LatLng(28.479261666666666, 76.90485166666667);
+    debugPrint("Map Disposed");
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     late WebViewXController webviewController;
@@ -29,24 +52,36 @@ class _PopUpMapWindowState extends State<PopUpMapWindow> {
         return Container(
           width: constraints.maxWidth,
           height: constraints.maxHeight,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(10),
+          padding: const EdgeInsets.only(
+            right: 10,
+            left: 10,
+            bottom: 10,
+            top: 0,
           ),
-          child: mapWindow(),
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.only(
+              bottomLeft: ui.Radius.circular(10),
+              bottomRight: ui.Radius.circular(10),
+            ),
+          ),
+          child: ClipRRect(
+              borderRadius: const BorderRadius.only(
+                bottomLeft: ui.Radius.circular(10),
+                bottomRight: ui.Radius.circular(10),
+              ),
+              child: mapWindow(_latLng)),
         );
       },
     );
   }
 }
 
-Widget mapWindow() {
+Widget mapWindow(LatLng latLngValue) {
   String htmlId = "static_map";
 
   // ignore: undefined_prefixed_name
   ui.platformViewRegistry.registerViewFactory(htmlId, (int viewId) {
-    final myLatlng = LatLng(28.479261666666666, 76.90485166666667);
-
     final mapOptions = MapOptions()
       ..zoom = 15
       ..streetViewControl = false
@@ -58,7 +93,7 @@ Widget mapWindow() {
       ..draggable = false
       ..keyboardShortcuts = false
       ..disableDefaultUI = true
-      ..center = myLatlng;
+      ..center = latLngValue;
 
     final elem = DivElement()
       ..id = htmlId
@@ -69,7 +104,7 @@ Widget mapWindow() {
     final map = GMap(elem, mapOptions);
 
     Marker(MarkerOptions()
-      ..position = myLatlng
+      ..position = latLngValue
       ..map = map
       ..visible = true
       ..clickable = false);

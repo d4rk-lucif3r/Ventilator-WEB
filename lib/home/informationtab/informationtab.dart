@@ -29,12 +29,14 @@ class InformationTab extends StatefulWidget {
     required this.providerecg2,
     required this.providerecg3,
     required this.providerecg4,
+    required this.updateState,
   }) : super(key: key);
   // final RealTimeGraph providerg;
   final ECG1 providerecg1;
   final ECG2 providerecg2;
   final ECG3 providerecg3;
   final ECG4 providerecg4;
+  final Function updateState;
 
   @override
   State<InformationTab> createState() => _InformationTabState();
@@ -188,7 +190,8 @@ class _InformationTabState extends State<InformationTab> {
                                                       CrossAxisAlignment.end,
                                                   children: [
                                                     Visibility(
-                                                      visible: _showModes,
+                                                      visible: transprovider
+                                                          .showModes,
                                                       child: Container(
                                                         width: (2 / 3) * h,
                                                         height: h,
@@ -198,7 +201,8 @@ class _InformationTabState extends State<InformationTab> {
                                                       ),
                                                     ),
                                                     Visibility(
-                                                      visible: _showSettings,
+                                                      visible: transprovider
+                                                          .showSettings,
                                                       child: Container(
                                                         width: (2 / 3) * h,
                                                         height: h,
@@ -208,13 +212,17 @@ class _InformationTabState extends State<InformationTab> {
                                                       ),
                                                     ),
                                                     Visibility(
-                                                      visible: _showAlarms,
+                                                      visible: transprovider
+                                                          .showAlarms,
                                                       child: Container(
                                                         width: (3 / 2) * h,
                                                         height: h,
                                                         color:
                                                             Colors.transparent,
-                                                        child: PopUpAlarms(),
+                                                        child: PopUpAlarms(
+                                                          updateState: widget
+                                                              .updateState,
+                                                        ),
                                                       ),
                                                     ),
                                                   ],
@@ -256,12 +264,21 @@ class _InformationTabState extends State<InformationTab> {
                                           children: [
                                             Expanded(
                                               child: GestureDetector(
-                                                onTap: showSettingsFunc,
+                                                onTap: () {
+                                                  setState(() {
+                                                    transprovider.popUpCheck(
+                                                        'settings',
+                                                        !transprovider
+                                                            .showSettings);
+                                                    widget.updateState;
+                                                  });
+                                                },
                                                 child: SettingButton(
                                                   title: 'SETTINGS',
-                                                  colorValue: _showSettings
-                                                      ? Color(0xff29abe2)
-                                                      : Colors.white,
+                                                  colorValue:
+                                                      transprovider.showSettings
+                                                          ? Color(0xff29abe2)
+                                                          : Colors.white,
                                                 ),
                                               ),
                                             ),
@@ -271,12 +288,20 @@ class _InformationTabState extends State<InformationTab> {
                                             ),
                                             Expanded(
                                               child: GestureDetector(
-                                                onTap: showAlarmsFunc,
+                                                onTap: () {
+                                                  setState(() {
+                                                    transprovider.popUpCheck(
+                                                        'alarms',
+                                                        !transprovider
+                                                            .showAlarms);
+                                                  });
+                                                },
                                                 child: SettingButton(
                                                   title: 'ALARM',
-                                                  colorValue: _showAlarms
-                                                      ? Color(0xff29abe2)
-                                                      : Colors.white,
+                                                  colorValue:
+                                                      transprovider.showAlarms
+                                                          ? Color(0xff29abe2)
+                                                          : Colors.white,
                                                 ),
                                               ),
                                             ),
@@ -286,12 +311,20 @@ class _InformationTabState extends State<InformationTab> {
                                             ),
                                             Expanded(
                                               child: GestureDetector(
-                                                onTap: showModesFunc,
+                                                onTap: () {
+                                                  setState(() {
+                                                    transprovider.popUpCheck(
+                                                        'modes',
+                                                        !transprovider
+                                                            .showModes);
+                                                  });
+                                                },
                                                 child: SettingButton(
                                                   title: 'MODE',
-                                                  colorValue: _showModes
-                                                      ? Color(0xff29abe2)
-                                                      : Colors.white,
+                                                  colorValue:
+                                                      transprovider.showModes
+                                                          ? Color(0xff29abe2)
+                                                          : Colors.white,
                                                 ),
                                               ),
                                             ),
@@ -360,69 +393,69 @@ class _InformationTabState extends State<InformationTab> {
                 //         aspectWidth: 2),
                 //   ),
                 // ),
-                Visibility(
-                  visible: false,
-                  child: Padding(
-                    padding: EdgeInsets.only(left: w),
-                    child: Column(
-                      children: [
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        //TODO: Indicator White
-                        Expanded(
-                          flex: 2,
-                          child: Visibility(
-                            visible: false,
-                            maintainSize: true,
-                            maintainAnimation: true,
-                            maintainState: true,
-                            child: Container(
-                              color: Colors.transparent,
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                          child: Container(
-                            color: Colors.transparent,
-                          ),
-                        ),
-                        Expanded(
-                          flex: 9,
-                          child: Container(
-                            color: Colors.transparent,
-                            child: Row(
-                              children: [
-                                //TODO: PlusMinus
-                                // Expanded(
-                                //   flex: 1,
-                                //   child: Container(
-                                //     color: Colors.transparent,
-                                //   ),
-                                // ),
+                // Visibility(
+                //   visible: false,
+                //   child: Padding(
+                //     padding: EdgeInsets.only(left: w),
+                //     child: Column(
+                //       children: [
+                //         const SizedBox(
+                //           height: 5,
+                //         ),
+                //         //TODO: Indicator White
+                //         Expanded(
+                //           flex: 2,
+                //           child: Visibility(
+                //             visible: false,
+                //             maintainSize: true,
+                //             maintainAnimation: true,
+                //             maintainState: true,
+                //             child: Container(
+                //               color: Colors.transparent,
+                //             ),
+                //           ),
+                //         ),
+                //         SizedBox(
+                //           height: 10,
+                //           child: Container(
+                //             color: Colors.transparent,
+                //           ),
+                //         ),
+                //         Expanded(
+                //           flex: 9,
+                //           child: Container(
+                //             color: Colors.transparent,
+                //             child: Row(
+                //               children: [
+                //                 //TODO: PlusMinus
+                //                 // Expanded(
+                //                 //   flex: 1,
+                //                 //   child: Container(
+                //                 //     color: Colors.transparent,
+                //                 //   ),
+                //                 // ),
 
-                                //TODO: Graphs
-                                Expanded(
-                                  flex: 3,
-                                  child: Container(
-                                    color: Colors.transparent,
-                                  ),
-                                ),
+                //                 //TODO: Graphs
+                //                 Expanded(
+                //                   flex: 3,
+                //                   child: Container(
+                //                     color: Colors.transparent,
+                //                   ),
+                //                 ),
 
-                                //TODO: Profile
-                                Expanded(
-                                  flex: 1,
-                                  child: Container(),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                //                 //TODO: Profile
+                //                 Expanded(
+                //                   flex: 1,
+                //                   child: Container(),
+                //                 ),
+                //               ],
+                //             ),
+                //           ),
+                //         ),
+                //       ],
+                //     ),
+                //   ),
+                // ),
               ],
             ),
           );
@@ -482,7 +515,7 @@ class _POPUPWindowsState extends State<POPUPWindows> {
                     width: (3 / 2) * h,
                     height: h,
                     color: Colors.orange,
-                    child: PopUpAlarms(),
+                    // child: PopUpAlarms(),
                   ),
                 ),
               ],

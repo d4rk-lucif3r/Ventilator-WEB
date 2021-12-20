@@ -42,6 +42,7 @@ dependencies:
   # easy_web_view2: ^0.0.3
   webviewx: ^0.2.1
   google_maps:
+  flutter_svg: ^1.0.0
 
 dev_dependencies:
   flutter_test:
@@ -69,6 +70,9 @@ flutter:
   assets:
     - assets/fonts/
     - assets/logo/
+    - assets/logo/svg_icons/download.svg
+    - assets/logo/svg_icons/print.svg
+    - assets/logo/svg_icons/report.svg
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
