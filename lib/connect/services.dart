@@ -9,11 +9,12 @@ import 'package:ventilator_ui/connect/realtimefetch.dart';
 // const String YAYA = "127.0.0.1";
 // const String luci = '192.168.137.1';
 const String tenawa = '192.168.137.76';
-const String lucifer = '10.20.19.113';
+// const String lucifer = '192.168.137.1';
+const String lucifer = '192.168.137.1';
 
 const URL = "http://$lucifer:5000/api/";
 var loginAuthToken =
-    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTYzOTc2MjYxNCwianRpIjoiMTBiYzg4NTYtYmE3Yy00YzVlLWIxNTgtMWUwMjRiMTYyMWUwIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6Imx1Y2lmM3IiLCJuYmYiOjE2Mzk3NjI2MTQsImNzcmYiOiI5YWJlZTc1MC02ZjVjLTRlYjctYWUyYi01MmRiZjNkOWVhNjAiLCJleHAiOjE2NTA1NjI2MTR9.ACI_duwgMdeZCp3fGb53FYXXJ7H-XpWwaATqL1YUZjg';
+    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY0MDA2MjQzNCwianRpIjoiYjUyMWMxNzMtOTFjNy00N2U2LWE3NDktYjE0ODVhNDA4ODBlIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6Imx1Y2lmM3IiLCJuYmYiOjE2NDAwNjI0MzQsImNzcmYiOiI4ZDFlMGU4Yy0wYjhhLTQyMDQtYmMzZC01Mjk2ZTIyYjRkOWIiLCJleHAiOjE2NTA4NjI0MzR9.ly6frpN8W2d0npFxdmv8xhG58jOf5GrV9uOjKsnNoT0';
 // const secret = String.fromEnvironment('secret');
 // const url = String.fromEnvironment('url');
 

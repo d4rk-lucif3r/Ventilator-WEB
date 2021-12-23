@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
@@ -19,6 +21,7 @@ class RealTimeClass extends ChangeNotifier {
   late bool _ispeepalarm = false;
   late bool _issysalarm = false;
   late bool _isdiaalarm = false;
+  late bool _isi_ealarm = false;
   final LatLng _lastUpdatedLocation =
       LatLng(28.479261666666666, 76.90485166666667);
 
@@ -36,6 +39,7 @@ class RealTimeClass extends ChangeNotifier {
   bool get ispeepalarm => _ispeepalarm;
   bool get issysalarm => _issysalarm;
   bool get isdiaalarm => _isdiaalarm;
+  bool get isi_ealarm => _isi_ealarm;
   LatLng get lastUpdatedLocation => _lastUpdatedLocation;
 
   // final StreamController _controller = StreamController();
@@ -66,7 +70,6 @@ class RealTimeClass extends ChangeNotifier {
     _dia = _getRandomDouble(60, 150).toString();
     _sys = _getRandomDouble(60, 150).toString();
     _ecg1 = _getRandomDouble(60, 150);
-
     notifyListeners();
 
     // print(
@@ -92,6 +95,7 @@ class RealTimeClass extends ChangeNotifier {
     } else {
       _ispralarm = false;
     }
+    notify();
   }
 
   void spo2alarm(bool active) {
@@ -100,6 +104,7 @@ class RealTimeClass extends ChangeNotifier {
     } else {
       _isspo2alarm = false;
     }
+    notify();
   }
 
   void pipalarm(bool active) {
@@ -108,6 +113,7 @@ class RealTimeClass extends ChangeNotifier {
     } else {
       _ispipalarm = false;
     }
+    notify();
   }
 
   void peepalarm(bool active) {
@@ -116,6 +122,7 @@ class RealTimeClass extends ChangeNotifier {
     } else {
       _ispeepalarm = false;
     }
+    notify();
   }
 
   void sysalarm(bool active) {
@@ -124,6 +131,7 @@ class RealTimeClass extends ChangeNotifier {
     } else {
       _ispralarm = false;
     }
+    notify();
   }
 
   void diaalarm(bool active) {
@@ -132,5 +140,15 @@ class RealTimeClass extends ChangeNotifier {
     } else {
       _isdiaalarm = false;
     }
+    notify();
+  }
+
+  void i_ealarm(bool active) {
+    if (active) {
+      _isi_ealarm = true;
+    } else {
+      _isi_ealarm = false;
+    }
+    notify();
   }
 }

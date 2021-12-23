@@ -35,6 +35,7 @@ class _IndicatorsState extends State<Indicators> {
               constValue: 1,
               maxValue: providerAlarm.prmax,
               minValue: providerAlarm.prmin,
+              isAlarmActive: provider.ispralarm,
             ),
             const SizedBox(
               width: 10,
@@ -47,6 +48,7 @@ class _IndicatorsState extends State<Indicators> {
               constValue: 2,
               maxValue: providerAlarm.spo2max,
               minValue: providerAlarm.spo2min,
+              isAlarmActive: provider.isspo2alarm,
             ),
             const SizedBox(
               width: 10,
@@ -60,6 +62,7 @@ class _IndicatorsState extends State<Indicators> {
               constValue: 3,
               maxValue: providerAlarm.pipmax,
               minValue: providerAlarm.pipmin,
+              isAlarmActive: provider.ispipalarm,
             ),
             const SizedBox(
               width: 10,
@@ -73,6 +76,7 @@ class _IndicatorsState extends State<Indicators> {
               constValue: 4,
               maxValue: providerAlarm.peepmax,
               minValue: providerAlarm.peepmin,
+              isAlarmActive: provider.ispeepalarm,
             ),
             const SizedBox(
               width: 10,
@@ -85,6 +89,7 @@ class _IndicatorsState extends State<Indicators> {
               constValue: 100,
               maxValue: 100,
               minValue: 0,
+              isAlarmActive: provider.isi_ealarm,
             ),
           ],
         ),

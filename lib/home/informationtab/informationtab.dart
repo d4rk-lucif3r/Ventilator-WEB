@@ -22,54 +22,51 @@ import 'plusminusbp/plusminusbp.dart';
 import 'profile/profile.dart';
 
 class InformationTab extends StatefulWidget {
-  const InformationTab({
+  InformationTab({
     Key? key,
     // required this.providerg,
     required this.providerecg1,
     required this.providerecg2,
     required this.providerecg3,
     required this.providerecg4,
-    required this.updateState,
+    // required this.parentStateUpdate,
   }) : super(key: key);
   // final RealTimeGraph providerg;
   final ECG1 providerecg1;
   final ECG2 providerecg2;
   final ECG3 providerecg3;
   final ECG4 providerecg4;
-  final Function updateState;
+  // final Function parentStateUpdate;
 
   @override
   State<InformationTab> createState() => _InformationTabState();
 }
 
 class _InformationTabState extends State<InformationTab> {
-  bool _showSettings = false;
-  bool _showAlarms = false;
-  bool _showModes = false;
-
-  void showSettingsFunc() {
-    setState(() {
-      _showSettings = !_showSettings;
-      _showAlarms = false;
-      _showModes = false;
-    });
-  }
-
-  void showAlarmsFunc() {
-    setState(() {
-      _showAlarms = !_showAlarms;
-      _showModes = false;
-      _showSettings = false;
-    });
-  }
-
-  void showModesFunc() {
-    setState(() {
-      _showModes = !_showModes;
-      _showAlarms = false;
-      _showSettings = false;
-    });
-  }
+  // bool _showSettings = false;
+  // bool _showAlarms = false;
+  // bool _showModes = false;
+  // void showSettingsFunc() {
+  //   setState(() {
+  //     _showSettings = !_showSettings;
+  //     _showAlarms = false;
+  //     _showModes = false;
+  //   });
+  // }
+  // void showAlarmsFunc() {
+  //   setState(() {
+  //     _showAlarms = !_showAlarms;
+  //     _showModes = false;
+  //     _showSettings = false;
+  //   });
+  // }
+  // void showModesFunc() {
+  //   setState(() {
+  //     _showModes = !_showModes;
+  //     _showAlarms = false;
+  //     _showSettings = false;
+  //   });
+  // }
 
   @override
   void initState() {
@@ -88,9 +85,12 @@ class _InformationTabState extends State<InformationTab> {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
-      var w = (MediaQuery.of(context).size.width) / 5.5;
-      return Consumer2<TempProvider, TransitionManager>(
-        builder: (context, tempprovider, transprovider, child) {
+      // var w = (MediaQuery.of(context).size.width) / 5.5;
+      // var h = (MediaQuery.of(context).size.height);
+      // debugPrint("Height : $h");
+
+      return Consumer3<TempProvider, TransitionManager, RealTimeClass>(
+        builder: (context, tempprovider, transprovider, provider, child) {
           return Container(
             margin: const EdgeInsets.only(
               bottom: 0,
@@ -157,6 +157,7 @@ class _InformationTabState extends State<InformationTab> {
                               flex: 3,
                               child: LayoutBuilder(
                                 builder: (context, constraints) {
+                                  // debugPrint("${constraints.maxHeight}");
                                   return Container(
                                     width: constraints.maxWidth,
                                     height: constraints.maxHeight,
@@ -220,8 +221,9 @@ class _InformationTabState extends State<InformationTab> {
                                                         color:
                                                             Colors.transparent,
                                                         child: PopUpAlarms(
-                                                          updateState: widget
-                                                              .updateState,
+                                                          updateState: () {
+                                                            setState(() {});
+                                                          },
                                                         ),
                                                       ),
                                                     ),
@@ -238,7 +240,7 @@ class _InformationTabState extends State<InformationTab> {
                               ),
                             ),
 
-                            //TODO: Profile
+                            //TODO: Setting Buttons
                             Expanded(
                               flex: 1,
                               child: LayoutBuilder(
@@ -265,13 +267,15 @@ class _InformationTabState extends State<InformationTab> {
                                             Expanded(
                                               child: GestureDetector(
                                                 onTap: () {
-                                                  setState(() {
-                                                    transprovider.popUpCheck(
-                                                        'settings',
-                                                        !transprovider
-                                                            .showSettings);
-                                                    widget.updateState;
-                                                  });
+                                                  // transprovider.popUpCheck(
+                                                  //     'settings',
+                                                  //     !transprovider
+                                                  //         .showSettings);
+                                                  // widget.parentStateUpdate;
+                                                  // debugPrint(
+                                                  // "Settings pressed");
+                                                  provider.pralarm(
+                                                      !provider.ispralarm);
                                                 },
                                                 child: SettingButton(
                                                   title: 'SETTINGS',
@@ -289,12 +293,14 @@ class _InformationTabState extends State<InformationTab> {
                                             Expanded(
                                               child: GestureDetector(
                                                 onTap: () {
-                                                  setState(() {
-                                                    transprovider.popUpCheck(
-                                                        'alarms',
-                                                        !transprovider
-                                                            .showAlarms);
-                                                  });
+                                                  // transprovider.popUpCheck(
+                                                  //     'alarms',
+                                                  //     !transprovider
+                                                  //         .showAlarms);
+                                                  // widget.parentStateUpdate;
+                                                  // debugPrint("Alarms pressed");
+                                                  provider.spo2alarm(
+                                                      !provider.isspo2alarm);
                                                 },
                                                 child: SettingButton(
                                                   title: 'ALARM',
@@ -312,12 +318,13 @@ class _InformationTabState extends State<InformationTab> {
                                             Expanded(
                                               child: GestureDetector(
                                                 onTap: () {
-                                                  setState(() {
-                                                    transprovider.popUpCheck(
-                                                        'modes',
-                                                        !transprovider
-                                                            .showModes);
-                                                  });
+                                                  // transprovider.popUpCheck(
+                                                  //     'modes',
+                                                  //     !transprovider.showModes);
+                                                  // widget.parentStateUpdate;
+                                                  // debugPrint("Modes pressed");
+                                                  provider.pipalarm(
+                                                      !provider.ispipalarm);
                                                 },
                                                 child: SettingButton(
                                                   title: 'MODE',
@@ -333,8 +340,14 @@ class _InformationTabState extends State<InformationTab> {
                                                   constraints.maxHeight / 18,
                                             ),
                                             Expanded(
-                                              child: SettingButton(
-                                                title: 'EMERGENCY',
+                                              child: GestureDetector(
+                                                onTap: () {
+                                                  provider.peepalarm(
+                                                      !provider.ispeepalarm);
+                                                },
+                                                child: SettingButton(
+                                                  title: 'EMERGENCY',
+                                                ),
                                               ),
                                             ),
                                             SizedBox(
@@ -342,8 +355,14 @@ class _InformationTabState extends State<InformationTab> {
                                                   constraints.maxHeight / 18,
                                             ),
                                             Expanded(
-                                              child: SettingButton(
-                                                title: 'RESET',
+                                              child: GestureDetector(
+                                                onTap: () {
+                                                  provider.i_ealarm(
+                                                      !provider.isi_ealarm);
+                                                },
+                                                child: SettingButton(
+                                                  title: 'RESET',
+                                                ),
                                               ),
                                             ),
                                           ],
@@ -434,7 +453,6 @@ class _InformationTabState extends State<InformationTab> {
                 //                 //     color: Colors.transparent,
                 //                 //   ),
                 //                 // ),
-
                 //                 //TODO: Graphs
                 //                 Expanded(
                 //                   flex: 3,
@@ -442,7 +460,6 @@ class _InformationTabState extends State<InformationTab> {
                 //                     color: Colors.transparent,
                 //                   ),
                 //                 ),
-
                 //                 //TODO: Profile
                 //                 Expanded(
                 //                   flex: 1,

@@ -18,7 +18,7 @@ class PlusMinusBP extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var h = MediaQuery.of(context).size.height;
-    debugPrint("$h");
+    // debugPrint("$h");
 
     return DefaultTextStyle(
       style: const TextStyle(
