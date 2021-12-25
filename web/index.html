@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <!--
     If you are serving your web app in a path other than the root, change the
@@ -18,7 +19,7 @@
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A new Flutter project.">
+  <meta name="ventilator_ui" content="SGT">
 
   <!-- iOS meta tags & icons -->
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -29,13 +30,43 @@
   <title>ventilator_ui</title>
   <link rel="manifest" href="manifest.json">
 
+  <!-- <script>
+
+    const apiKey = new String(`${window.my_var}`);
+    const url = new String(`https://maps.googleapis.com/maps/api/js?key=${apiKey}`);
+
+    document.addEventListener("api_url", function (url) {
+
+      var s = document.createElement('script');
+      s.setAttribute('src', url);
+      document.body.appendChild(s);
+      console.log(s);
+
+      // document.write(`<Script src=${url}>`);
+      // document.write.src = `https://maps.googleapis.com/maps/api/js?key=${window.my_var}`;
+
+      if (window.my_var != null) {
+        console.log(`Map API : ${window.my_var}`);
+      } else {
+        console.log("Map API unavailable");
+      }
+    }
+    );
+
+  </script> -->
+
+
 </head>
+
 <body>
   <!-- This script installs service_worker.js to provide PWA functionality to
        application. For more information, see:
        https://developers.google.com/web/fundamentals/primers/service-workers -->
-       <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4GfqRu9YuT4CEUlsRZ54fMbtFRSsyReA"></script>
-  
+
+
+  <!-- <script src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyA4GfqRu9YuT4CEUlsRZ54fMbtFRSsyReA'></script> -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=" +window.my_var></script>
+
   <script>
     var serviceWorkerVersion = null;
     var scriptLoaded = false;
@@ -100,6 +131,12 @@
       loadMainDartJs();
     }
   </script>
- 
+
+
+
+
+
+
 </body>
+
 </html>

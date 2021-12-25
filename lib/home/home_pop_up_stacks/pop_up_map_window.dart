@@ -40,14 +40,10 @@ class _PopUpMapWindowState extends State<PopUpMapWindow> {
 
   @override
   Widget build(BuildContext context) {
-    late WebViewXController webviewController;
+    // late WebViewXController webviewController;
 
     return LayoutBuilder(
       builder: (context, constraints) {
-        // final mapOptions = MapOptions()
-        //   ..zoom = 18
-        //   ..center = LatLng(-34.397, 150.644);
-        // GMap(document.getElementById("map-canvas"), mapOptions);
 
         return Container(
           width: constraints.maxWidth,
@@ -93,7 +89,8 @@ Widget mapWindow(LatLng latLngValue) {
       ..draggable = false
       ..keyboardShortcuts = false
       ..disableDefaultUI = true
-      ..center = latLngValue;
+      ..center = latLngValue
+      ;
 
     final elem = DivElement()
       ..id = htmlId

@@ -33,7 +33,7 @@ class _DisplayState extends State<Display> {
   late Timer timer;
   late Timer timerGraph;
   var count = 0;
-  Duration duration = const Duration(milliseconds: 10);
+  Duration duration = const Duration(milliseconds: 200);
   // bool _isInfoActive = false;
   // bool _isMapActive = false;
   // void infoUpdate() {
@@ -220,23 +220,23 @@ class _DisplayState extends State<Display> {
         //     },
         //   );
         // });
-        // try {
-        //   timerGraph = Timer.periodic(
-        //     duration,
-        //     (timer) => setState(
-        //       () {
-        //         // providerecg1.getChartData(timer);
-        //         // providerecg2.getChartData(timer);
-        //         providerecg3.getChartData(timer);
-        //         // providerecg4.getChartData(timer);
-        //         // debugPrint(count.toString());
-        //         timer.cancel();
-        //       },
-        //     ),
-        //   );
-        // } catch (e) {
-        //   debugPrint("$e");
-        // }
+        try {
+          timerGraph = Timer.periodic(
+            duration,
+            (timer) => setState(
+              () {
+                // providerecg1.getChartData(timer);
+                // providerecg2.getChartData(timer);
+                providerecg3.getChartData(timer);
+                // providerecg4.getChartData(timer);
+                // debugPrint(count.toString());
+                timer.cancel();
+              },
+            ),
+          );
+        } catch (e) {
+          debugPrint("$e");
+        }
         // timertwo = Timer.periodic(
         //   duration,
         //   (timertwo) => setState(

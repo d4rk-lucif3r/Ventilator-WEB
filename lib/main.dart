@@ -1,5 +1,7 @@
-import 'dart:html';
+import 'dart:html' as html;
+import 'dart:js' as js;
 import 'dart:io';
+import 'dart:math';
 import 'dart:ui' as ui;
 import 'package:google_maps/google_maps.dart';
 import 'package:http/http.dart';
@@ -16,22 +18,22 @@ import 'dispose/slider_test.dart';
 import 'dispose/spo2_development/working/graph-algo-test.dart';
 import 'dispose/slider_test.dart';
 
-void main() {
-  // final mapOptions = MapOptions()
-  //   ..zoom = 8
-  //   ..center = LatLng(-34.397, 150.644);
-  // GMap(document.getElementById("map-canvas"), mapOptions);
-  // var bing = await login('lucif3r', 'lucif3r');
-  // print("${bing}");
+void main() async {
+  var bing = await login('lucif3r', 'lucif3r');
+  print("${bing}");
   // while (true) {
-  // List<dynamic> streamData = await fetchData("data?stream=1");
-  // try {
-  // var data = streamData[0]['2'];
-  // print(streamData);
-  // } catch (e) {
-  //   print(e);
+  //   // List<dynamic> streamData = await fetchData("alarms");
+  //   List<dynamic> streamData = await fetchData("data?stream=1");
+
+  //   try {
+  //     var data = streamData[0]['2'];
+  //     debugPrint("$streamData");
+  //   } catch (e) {
+  //     debugPrint('$e');
+  //   }
   // }
-  // }
+
+  js.context['my_var'] = const String.fromEnvironment('api');
 
   runApp(const App());
 }
