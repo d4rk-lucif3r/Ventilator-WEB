@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:html' as html;
 import 'dart:js' as js;
 import 'dart:io';
@@ -20,22 +21,29 @@ import 'dispose/slider_test.dart';
 
 void main() async {
   var bing = await login('lucif3r', 'lucif3r');
-  print("${bing}");
-  // while (true) {
-  //   // List<dynamic> streamData = await fetchData("alarms");
-  //   List<dynamic> streamData = await fetchData("data?stream=1");
+  print("$bing");
+  Timer _timeBomb;
 
-  //   try {
-  //     var data = streamData[0]['2'];
-  //     debugPrint("$streamData");
-  //   } catch (e) {
-  //     debugPrint('$e');
-  //   }
-  // }
+  void getData(Timer timer) async {
+    List<dynamic> streamData = await fetchData("alarms?stream=1");
+    try {
+      debugPrint("${streamData}");
+    } catch (e) {
+      debugPrint('$e');
+    }
+    // timer.cancel();
+  }
+
+  _timeBomb = Timer.periodic(
+    const Duration(milliseconds: 300),
+    (_timeBomb) {
+      getData(_timeBomb);
+    },
+  );
 
   js.context['my_var'] = const String.fromEnvironment('api');
 
-  runApp(const App());
+  // runApp(const App());
 }
 
 class App extends StatefulWidget {
