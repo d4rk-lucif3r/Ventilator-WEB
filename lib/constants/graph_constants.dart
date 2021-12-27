@@ -203,4 +203,7 @@ List<int> indexList60 = [
   60
 ];
 
-List<int> indexList = indexList120;
+List<int> g1IndexList = indexList120;
+List<int> g2IndexList = indexList120;
+List<int> g3IndexList = indexList120;
+List<int> g4IndexList = indexList120;

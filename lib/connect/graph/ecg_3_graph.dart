@@ -47,7 +47,7 @@ class ECG3 extends ChangeNotifier {
   void _removeAllChartData() {
     _chartData.clear();
     chartSeriesController.updateDataSource(
-      removedDataIndexes: indexList,
+      removedDataIndexes: g3IndexList,
     );
     _tempList.clear();
   }

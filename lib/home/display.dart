@@ -175,65 +175,66 @@ class _DisplayState extends State<Display> {
               providerecg3, providerecg4, child) {
         //TODO: Display funtions are executed here
         providerinfo.getPatientData();
-        timer = Timer.periodic(duration, (timer) {
-          provider.updateStreamedData(timer);
-          // setState(
-          //   () {
-          //     debugPrint("Before Counting : $count\n");
-          //     if (count >= 29) {
-          //       duration = const Duration(milliseconds: 500);
-          //       debugPrint("$duration");
-          //       if (count >= 59) {
-          //         if (count % 10 == 0) {
-          //           // debugPrint("Graphs");
-          //           debugPrint("Greater than 59");
-          //           providerecg1.getChartData(timer);
-          //           providerecg2.getChartData(timer);
-          //           providerecg3.getChartData(timer);
-          //           providerecg4.getChartData(timer);
-          //         }
-          //       } else if (count < 59) {
-          //         if (count % 2 == 0) {
-          //           // debugPrint("Graphs");
-          //           debugPrint("Lesser than 59");
-          //           providerecg1.getChartData(timer);
-          //           providerecg2.getChartData(timer);
-          //           providerecg3.getChartData(timer);
-          //           providerecg4.getChartData(timer);
-          //         }
-          //       }
-          //       count++;
-          //     } else {
-          //       // debugPrint("Graphs");
-          //       debugPrint("Lesser than 29");
-          //       providerecg1.getChartData(timer);
-          //       providerecg2.getChartData(timer);
-          //       providerecg3.getChartData(timer);
-          //       providerecg4.getChartData(timer);
-          //       count++;
-          //     }
-          //     // debugPrint("Realtime");
-          //     debugPrint("After Counting : $count");
-          //   },
-          // );
-        });
-        try {
-          timerGraph = Timer.periodic(
-            duration,
-            (timer) => setState(
-              () {
-                // providerecg1.getChartData(timer);
-                // providerecg2.getChartData(timer);
-                providerecg3.getChartData(timer);
-                // providerecg4.getChartData(timer);
-                // debugPrint(count.toString());
-                timer.cancel();
-              },
-            ),
-          );
-        } catch (e) {
-          debugPrint("Graph ERROR : $e");
-        }
+        // timer = Timer.periodic(duration, (timer) {
+        //   provider.updateStreamedData(timer);
+        //   // setState(
+        //   //   () {
+        //   //     debugPrint("Before Counting : $count\n");
+        //   //     if (count >= 29) {
+        //   //       duration = const Duration(milliseconds: 500);
+        //   //       debugPrint("$duration");
+        //   //       if (count >= 59) {
+        //   //         if (count % 10 == 0) {
+        //   //           // debugPrint("Graphs");
+        //   //           debugPrint("Greater than 59");
+        //   //           providerecg1.getChartData(timer);
+        //   //           providerecg2.getChartData(timer);
+        //   //           providerecg3.getChartData(timer);
+        //   //           providerecg4.getChartData(timer);
+        //   //         }
+        //   //       } else if (count < 59) {
+        //   //         if (count % 2 == 0) {
+        //   //           // debugPrint("Graphs");
+        //   //           debugPrint("Lesser than 59");
+        //   //           providerecg1.getChartData(timer);
+        //   //           providerecg2.getChartData(timer);
+        //   //           providerecg3.getChartData(timer);
+        //   //           providerecg4.getChartData(timer);
+        //   //         }
+        //   //       }
+        //   //       count++;
+        //   //     } else {
+        //   //       // debugPrint("Graphs");
+        //   //       debugPrint("Lesser than 29");
+        //   //       providerecg1.getChartData(timer);
+        //   //       providerecg2.getChartData(timer);
+        //   //       providerecg3.getChartData(timer);
+        //   //       providerecg4.getChartData(timer);
+        //   //       count++;
+        //   //     }
+        //   //     // debugPrint("Realtime");
+        //   //     debugPrint("After Counting : $count");
+        //   //   },
+        //   // );
+        // });
+        // try {
+        //   timerGraph = Timer.periodic(
+        //     duration,
+        //     (timer) => setState(
+        //       () {
+        //         // providerecg1.getChartData(timer);
+        //         // providerecg2.getChartData(timer);
+        //         providerecg3.getChartData(timer);
+        //         // providerecg4.getChartData(timer);
+        //         // debugPrint(count.toString());
+        //         timer.cancel();
+        //       },
+        //     ),
+        //   );
+        // } catch (e) {
+        //   debugPrint("Graph ERROR : $e");
+        // }
+
         // timertwo = Timer.periodic(
         //   duration,
         //   (timertwo) => setState(

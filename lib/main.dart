@@ -20,30 +20,30 @@ import 'dispose/spo2_development/working/graph-algo-test.dart';
 import 'dispose/slider_test.dart';
 
 void main() async {
-  var bing = await login('lucif3r', 'lucif3r');
-  print("$bing");
-  Timer _timeBomb;
+  // var bing = await login('lucif3r', 'lucif3r');
+  // print("$bing");
+  // Timer _timeBomb;
 
-  void getData(Timer timer) async {
-    List<dynamic> streamData = await fetchData("alarms?stream=1");
-    try {
-      debugPrint("${streamData}");
-    } catch (e) {
-      debugPrint('$e');
-    }
-    // timer.cancel();
-  }
+  // void getData(Timer timer) async {
+  //   List<dynamic> streamData = await fetchData("alarms?stream=1");
+  //   try {
+  //     debugPrint("${streamData}");
+  //   } catch (e) {
+  //     debugPrint('$e');
+  //   }
+  //   // timer.cancel();
+  // }
 
-  _timeBomb = Timer.periodic(
-    const Duration(milliseconds: 300),
-    (_timeBomb) {
-      getData(_timeBomb);
-    },
-  );
+  // _timeBomb = Timer.periodic(
+  //   const Duration(milliseconds: 300),
+  //   (_timeBomb) {
+  //     getData(_timeBomb);
+  //   },
+  // );
 
   js.context['my_var'] = const String.fromEnvironment('api');
 
-  // runApp(const App());
+  runApp(const App());
 }
 
 class App extends StatefulWidget {
