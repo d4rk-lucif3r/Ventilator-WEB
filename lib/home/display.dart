@@ -34,20 +34,6 @@ class _DisplayState extends State<Display> {
   late Timer timerGraph;
   var count = 0;
   Duration duration = const Duration(milliseconds: 200);
-  // bool _isInfoActive = false;
-  // bool _isMapActive = false;
-  // void infoUpdate() {
-  //   setState(() {
-  //     _isMapActive = false;
-  //     _isInfoActive = !_isInfoActive;
-  //   });
-  // }
-  // void mapUpdate() {
-  //   setState(() {
-  //     _isInfoActive = false;
-  //     _isMapActive = !_isMapActive;
-  //   });
-  // }
 
   @override
   void initState() {
@@ -142,6 +128,9 @@ class _DisplayState extends State<Display> {
           create: (_) => AlarmSync(),
         ),
         ChangeNotifierProvider(
+          create: (_) => ChartSync(),
+        ),
+        ChangeNotifierProvider(
           create: (_) => PlusMinusProvider(),
         ),
         ChangeNotifierProvider(
@@ -168,11 +157,12 @@ class _DisplayState extends State<Display> {
       ],
 
       //TODO: Display children Starts from here
-      child: Consumer6<RealTimeClass, PatientInfo, ECG1, ECG2, ECG3, ECG4>(
+      child: Consumer6<RealTimeClass, PatientInfo, TransitionManager,
+              TempProvider, ChartSync, AlarmSync>(
 
           //TODO : Display consumers are listed here
-          builder: (context, provider, providerinfo, providerecg1, providerecg2,
-              providerecg3, providerecg4, child) {
+          builder: (context, provider, providerinfo, transprovider,
+              tempprovider, syncprovider, alarmprovider, child) {
         //TODO: Display funtions are executed here
         providerinfo.getPatientData();
         // timer = Timer.periodic(duration, (timer) {
@@ -222,9 +212,13 @@ class _DisplayState extends State<Display> {
         //     duration,
         //     (timer) => setState(
         //       () {
+        //         syncprovider.getChartData(timer, 'g1');
+        //         syncprovider.getChartData(timer, 'g2');
+        //         syncprovider.getChartData(timer, 'g3');
+        //         syncprovider.getChartData(timer, 'g4');
         //         // providerecg1.getChartData(timer);
         //         // providerecg2.getChartData(timer);
-        //         providerecg3.getChartData(timer);
+        //         // providerecg3.getChartData(timer);
         //         // providerecg4.getChartData(timer);
         //         // debugPrint(count.toString());
         //         timer.cancel();
@@ -272,107 +266,92 @@ class _DisplayState extends State<Display> {
         //   if (snapshot.connectionState == ConnectionState.done) {
         //     debugPrint("Done");
         //   }
-        return Consumer2<TransitionManager, TempProvider>(
-            builder: (context, transprovider, tempprovider, child) {
-          void updateState() {
-            if (transprovider.showSettings ||
-                transprovider.showModes ||
-                transprovider.showAlarms ||
-                transprovider.showPatienInfo ||
-                transprovider.showMapWindow) {
-              setState(() {});
-            }
-            debugPrint("Parent State Refreshed");
-          }
 
-          return DefaultTextStyle(
-            style: const TextStyle(inherit: false),
-            child: Container(
-              width: double.infinity,
-              height: double.maxFinite,
-              // margin: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: const Color(0xffd0ffff),
-                // gradient: LinearGradient(
-                //   begin: Alignment.topCenter,
-                //   end: Alignment.bottomCenter,
-                //   colors: [
-                //     const Color(0xffd0ffff),
-                //     Colors.grey.shade300,
-                //   ],
-                //   stops: const [
-                //     .01,
-                //     .7,
-                //   ],
-                // ),
-                borderRadius: BorderRadius.circular(0),
-              ),
-              alignment: Alignment.center,
-              child: w <= 1300 || h <= 750
-                  ? DefaultTextStyle(
-                      style: const TextStyle(
-                        inherit: false,
+        return DefaultTextStyle(
+          style: const TextStyle(inherit: false),
+          child: Container(
+            width: double.infinity,
+            height: double.maxFinite,
+            // margin: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: const Color(0xffd0ffff),
+              // gradient: LinearGradient(
+              //   begin: Alignment.topCenter,
+              //   end: Alignment.bottomCenter,
+              //   colors: [
+              //     const Color(0xffd0ffff),
+              //     Colors.grey.shade300,
+              //   ],
+              //   stops: const [
+              //     .01,
+              //     .7,
+              //   ],
+              // ),
+              borderRadius: BorderRadius.circular(0),
+            ),
+            alignment: Alignment.center,
+            child: w <= 1300 || h <= 750
+                ? DefaultTextStyle(
+                    style: const TextStyle(
+                      inherit: false,
+                    ),
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(
+                        maxHeight: 400,
+                        minHeight: 100,
+                        maxWidth: w * .8,
+                        minWidth: 200,
                       ),
-                      child: ConstrainedBox(
-                        constraints: BoxConstraints(
-                          maxHeight: 400,
-                          minHeight: 100,
-                          maxWidth: w * .8,
-                          minWidth: 200,
-                        ),
-                        child: Container(
-                          // color: Colors.red[700],
-                          color: Colors.transparent,
-                          child: Center(
-                              child: RichText(
-                            textAlign: TextAlign.center,
-                            text: TextSpan(children: [
-                              TextSpan(
-                                text: "Need Bigger Screen",
-                                style: TextStyle(
-                                  fontSize: w * .07,
-                                  color: Colors.black,
-                                  fontFamily: 'Lora',
-                                  fontWeight: FontWeight.w600,
-                                  overflow: TextOverflow.visible,
-                                ),
+                      child: Container(
+                        // color: Colors.red[700],
+                        color: Colors.transparent,
+                        child: Center(
+                            child: RichText(
+                          textAlign: TextAlign.center,
+                          text: TextSpan(children: [
+                            TextSpan(
+                              text: "Need Bigger Screen",
+                              style: TextStyle(
+                                fontSize: w * .07,
+                                color: Colors.black,
+                                fontFamily: 'Lora',
+                                fontWeight: FontWeight.w600,
+                                overflow: TextOverflow.visible,
                               ),
-                              TextSpan(
-                                text:
-                                    "\n\nYour screen should be minimum 750 x 1300 pixel.",
-                                style: TextStyle(
-                                  fontSize: w * .019,
-                                  color: Colors.black,
-                                  fontFamily: 'Lora',
-                                  fontWeight: FontWeight.w200,
-                                  overflow: TextOverflow.visible,
-                                ),
+                            ),
+                            TextSpan(
+                              text:
+                                  "\n\nYour screen should be minimum 750 x 1300 pixel.",
+                              style: TextStyle(
+                                fontSize: w * .019,
+                                color: Colors.black,
+                                fontFamily: 'Lora',
+                                fontWeight: FontWeight.w200,
+                                overflow: TextOverflow.visible,
                               ),
-                            ]),
-                          )),
-                        ),
-                      ),
-                    )
-                  : AspectRatio(
-                      aspectRatio: 16 / 9,
-                      child: Dashboard(
-                        provider: provider,
-                        providerinfo: providerinfo,
-                        providerecg1: providerecg1,
-                        providerecg2: providerecg2,
-                        providerecg3: providerecg3,
-                        providerecg4: providerecg4,
-                        transprovider: transprovider,
-                        tempProvider: tempprovider,
-                        updateState: () {
-                          setState(() {});
-                          debugPrint("Parent State Refreshed");
-                        },
+                            ),
+                          ]),
+                        )),
                       ),
                     ),
-            ),
-          );
-        });
+                  )
+                : AspectRatio(
+                    aspectRatio: 16 / 9,
+                    child: Dashboard(
+                      provider: provider,
+                      providerinfo: providerinfo,
+                      syncprovider: syncprovider,
+                      alarmprovider: alarmprovider,
+                      transprovider: transprovider,
+                      tempProvider: tempprovider,
+                      updateState: () {
+                        setState(() {});
+                        debugPrint("Parent State Refreshed");
+                      },
+                    ),
+                  ),
+          ),
+        );
       }
           // );
           // },
@@ -386,10 +365,8 @@ class Dashboard extends StatefulWidget {
     Key? key,
     required this.provider,
     required this.providerinfo,
-    required this.providerecg1,
-    required this.providerecg2,
-    required this.providerecg3,
-    required this.providerecg4,
+    required this.syncprovider,
+    required this.alarmprovider,
     required this.transprovider,
     required this.tempProvider,
     required this.updateState,
@@ -397,10 +374,8 @@ class Dashboard extends StatefulWidget {
 
   final RealTimeClass provider;
   final PatientInfo providerinfo;
-  final ECG1 providerecg1;
-  final ECG2 providerecg2;
-  final ECG3 providerecg3;
-  final ECG4 providerecg4;
+  final ChartSync syncprovider;
+  final AlarmSync alarmprovider;
   final TransitionManager transprovider;
   final TempProvider tempProvider;
   final Function updateState;
@@ -416,6 +391,7 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     // widget.updateState;
     // updateState(widget.transprovider);
+
     if (widget.transprovider.showSettings ||
         widget.transprovider.showModes ||
         widget.transprovider.showAlarms ||
@@ -423,6 +399,49 @@ class _DashboardState extends State<Dashboard> {
         widget.transprovider.showMapWindow) {
       widget.updateState;
     }
+
+    //TODO: pr alarm
+    int.parse(widget.provider.pr) <= widget.alarmprovider.prmax.toInt() &&
+            int.parse(widget.provider.pr) >= widget.alarmprovider.prmin.toInt()
+        ? widget.provider.ispralarm == true
+            ? widget.provider.pralarm(false)
+            : widget.provider.doNothing()
+        : widget.provider.ispralarm == false
+            ? widget.provider.pralarm(true)
+            : widget.provider.doNothing();
+
+    //TODO: spo2 alarm
+    int.parse(widget.provider.spo2) <= widget.alarmprovider.spo2max.toInt() &&
+            int.parse(widget.provider.spo2) >=
+                widget.alarmprovider.spo2min.toInt()
+        ? widget.provider.isspo2alarm == true
+            ? widget.provider.spo2alarm(false)
+            : widget.provider.doNothing()
+        : widget.provider.isspo2alarm == false
+            ? widget.provider.spo2alarm(true)
+            : widget.provider.doNothing();
+
+    //TODO: pip alarm
+    int.parse(widget.provider.pip) <= widget.alarmprovider.pipmax.toInt() &&
+            int.parse(widget.provider.pip) >=
+                widget.alarmprovider.pipmin.toInt()
+        ? widget.provider.ispipalarm == true
+            ? widget.provider.pipalarm(false)
+            : widget.provider.doNothing()
+        : widget.provider.ispipalarm == false
+            ? widget.provider.pipalarm(true)
+            : widget.provider.doNothing();
+
+    //TODO: peep alarm
+    int.parse(widget.provider.peep) <= widget.alarmprovider.peepmax.toInt() &&
+            int.parse(widget.provider.peep) >=
+                widget.alarmprovider.peepmin.toInt()
+        ? widget.provider.ispeepalarm == true
+            ? widget.provider.peepalarm(false)
+            : widget.provider.doNothing()
+        : widget.provider.ispeepalarm == false
+            ? widget.provider.peepalarm(true)
+            : widget.provider.doNothing();
 
     return Container(
       margin: const EdgeInsets.all(15),
@@ -491,8 +510,6 @@ class _DashboardState extends State<Dashboard> {
                             // color: Color(0xff81d4fa),
                             // color: Color(0xffECF2FE),
                             color: Colors.white,
-
-                            //ccf4d7
                             borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(10),
                               topRight: Radius.circular(10),
@@ -503,11 +520,6 @@ class _DashboardState extends State<Dashboard> {
                                 blurRadius: 4,
                                 offset: Offset(4, 4),
                               ),
-                              // BoxShadow(
-                              //   color: Colors.black38,
-                              //   blurRadius: 4,
-                              //   offset: Offset(-2, 4),
-                              // ),
                               BoxShadow(
                                 color: Colors.black26,
                                 blurRadius: 2,
@@ -665,9 +677,6 @@ class _DashboardState extends State<Dashboard> {
                       },
                     ),
                   ),
-
-//=============================================================================================
-/////////////////////////////////////////////////////////////////////////////////////////////
                   Expanded(
                       flex: 26,
                       child: Container(
@@ -695,10 +704,11 @@ class _DashboardState extends State<Dashboard> {
                                         child: InformationTab(
                                           // providerg:
                                           //     provider,
-                                          providerecg1: widget.providerecg1,
-                                          providerecg2: widget.providerecg2,
-                                          providerecg3: widget.providerecg3,
-                                          providerecg4: widget.providerecg4,
+                                          syncprovider: widget.syncprovider,
+                                          // providerecg1: widget.providerecg1,
+                                          // providerecg2: widget.providerecg2,
+                                          // providerecg3: widget.providerecg3,
+                                          // providerecg4: widget.providerecg4,
                                           // parentStateUpdate: widget.updateState,
                                         ),
                                       ),

@@ -7,10 +7,10 @@ import 'package:google_maps/google_maps.dart';
 import 'package:ventilator_ui/connect/services.dart';
 
 class RealTimeClass extends ChangeNotifier {
-  late String _pr = '0';
-  late String _spo2 = '0';
-  late String _pip = '0';
-  late String _peep = '0';
+  late String _pr = '60';
+  late String _spo2 = '93';
+  late String _pip = '20';
+  late String _peep = '4';
   late String _i_e = '00';
   late String _dia = '0';
   late String _sys = '0';
@@ -62,10 +62,10 @@ class RealTimeClass extends ChangeNotifier {
     // _dia = streamData[0]['9'].toString();
     // _ecg1 = streamData[0]['6'];
     // await Future.delayed(const Duration(milliseconds: 3000));
-    _pr = _getRandomDouble(60, 150).toString();
-    _spo2 = _getRandomDouble(60, 150).toString();
-    _pip = _getRandomDouble(60, 150).toString();
-    _peep = _getRandomDouble(60, 150).toString();
+    _pr = _getRandomDouble(59, 101).toString();
+    _spo2 = _getRandomDouble(92, 102).toString();
+    _pip = _getRandomDouble(19, 31).toString();
+    _peep = _getRandomDouble(4, 7).toString();
     _i_e = _getRandomDouble(11, 16).toString();
     _dia = _getRandomDouble(60, 150).toString();
     _sys = _getRandomDouble(60, 150).toString();
@@ -88,6 +88,8 @@ class RealTimeClass extends ChangeNotifier {
     final Random random = Random();
     return min + random.nextInt(max - min) as double;
   }
+
+  void doNothing() {}
 
   void pralarm(bool active) {
     if (active) {

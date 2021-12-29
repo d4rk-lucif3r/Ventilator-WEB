@@ -108,7 +108,7 @@ class GraphECG3 extends StatelessWidget {
                     ),
                     ECG3Graph(
                       provider: provider,
-                      enableDefault: enableDefault,
+                      // enableDefault: enableDefault,
                     ),
                   ]),
                 ),
@@ -125,11 +125,11 @@ class ECG3Graph extends StatefulWidget {
   const ECG3Graph({
     Key? key,
     required this.provider,
-    this.enableDefault,
+    // this.enableDefault,
   }) : super(key: key);
 
   final ECG3 provider;
-  final bool? enableDefault;
+  // final bool? enableDefault;
 
   @override
   _ECG3GraphState createState() => _ECG3GraphState();

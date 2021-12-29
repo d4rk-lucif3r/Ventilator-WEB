@@ -4,6 +4,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:ventilator_ui/connect/alarmsync.dart';
 import 'package:ventilator_ui/connect/graph/chartsync.dart';
 import 'package:ventilator_ui/connect/graph/ecg_1_graph.dart';
 import 'package:ventilator_ui/connect/graph/ecg_2_graph.dart';
@@ -25,17 +26,19 @@ class InformationTab extends StatefulWidget {
   InformationTab({
     Key? key,
     // required this.providerg,
-    required this.providerecg1,
-    required this.providerecg2,
-    required this.providerecg3,
-    required this.providerecg4,
+    // required this.providerecg1,
+    // required this.providerecg2,
+    // required this.providerecg3,
+    // required this.providerecg4,
+    required this.syncprovider,
     // required this.parentStateUpdate,
   }) : super(key: key);
   // final RealTimeGraph providerg;
-  final ECG1 providerecg1;
-  final ECG2 providerecg2;
-  final ECG3 providerecg3;
-  final ECG4 providerecg4;
+  final ChartSync syncprovider;
+  // final ECG1 providerecg1;
+  // final ECG2 providerecg2;
+  // final ECG3 providerecg3;
+  // final ECG4 providerecg4;
   // final Function parentStateUpdate;
 
   @override
@@ -43,31 +46,6 @@ class InformationTab extends StatefulWidget {
 }
 
 class _InformationTabState extends State<InformationTab> {
-  // bool _showSettings = false;
-  // bool _showAlarms = false;
-  // bool _showModes = false;
-  // void showSettingsFunc() {
-  //   setState(() {
-  //     _showSettings = !_showSettings;
-  //     _showAlarms = false;
-  //     _showModes = false;
-  //   });
-  // }
-  // void showAlarmsFunc() {
-  //   setState(() {
-  //     _showAlarms = !_showAlarms;
-  //     _showModes = false;
-  //     _showSettings = false;
-  //   });
-  // }
-  // void showModesFunc() {
-  //   setState(() {
-  //     _showModes = !_showModes;
-  //     _showAlarms = false;
-  //     _showSettings = false;
-  //   });
-  // }
-
   @override
   void initState() {
     // TODO: implement initState
@@ -166,11 +144,11 @@ class _InformationTabState extends State<InformationTab> {
                                       alignment: Alignment.centerRight,
                                       children: [
                                         Graphs(
-                                          // providerg: widget.providerg,
-                                          providerecg1: widget.providerecg1,
-                                          providerecg2: widget.providerecg2,
-                                          providerecg3: widget.providerecg3,
-                                          providerecg4: widget.providerecg4,
+                                          syncprovider: widget.syncprovider,
+                                          // providerecg1: widget.providerecg1,
+                                          // providerecg2: widget.providerecg2,
+                                          // providerecg3: widget.providerecg3,
+                                          // providerecg4: widget.providerecg4,
                                         ),
                                         LayoutBuilder(
                                           builder: (context, constraints) {

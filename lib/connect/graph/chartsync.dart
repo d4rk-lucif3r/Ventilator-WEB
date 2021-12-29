@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_final_fields
+
 import 'dart:math';
 import 'dart:async';
 import 'package:flutter/material.dart';
@@ -6,7 +8,7 @@ import 'package:ventilator_ui/connect/realtimefetch.dart';
 import 'package:ventilator_ui/connect/services.dart';
 import 'package:ventilator_ui/constants/graph_constants.dart';
 
-class GraphDisplay extends ChangeNotifier {
+class ChartSync extends ChangeNotifier {
   bool g1Count = false;
   bool g2Count = false;
   bool g3Count = false;
@@ -79,30 +81,30 @@ class GraphDisplay extends ChangeNotifier {
       case 'g1':
         _g1TempList.add(data);
         _g1YAxisRangeMin =
-            _g1TempList.reduce(min).toDouble() - (_g1TempList.reduce(max) / 20);
+            _g1TempList.reduce(min).toDouble() - (_g1TempList.reduce(max) / 10);
         _g1YAxisRangeMax =
-            _g1TempList.reduce(max).toDouble() + (_g1TempList.reduce(max) / 20);
+            _g1TempList.reduce(max).toDouble() + (_g1TempList.reduce(max) / 10);
         break;
       case 'g2':
         _g2TempList.add(data);
         _g2YAxisRangeMin =
-            _g2TempList.reduce(min).toDouble() - (_g2TempList.reduce(max) / 20);
-        _g3YAxisRangeMax =
-            _g2TempList.reduce(max).toDouble() + (_g2TempList.reduce(max) / 20);
+            _g2TempList.reduce(min).toDouble() - (_g2TempList.reduce(max) / 10);
+        _g2YAxisRangeMax =
+            _g2TempList.reduce(max).toDouble() + (_g2TempList.reduce(max) / 10);
         break;
       case 'g3':
         _g3TempList.add(data);
         _g3YAxisRangeMin =
-            _g3TempList.reduce(min).toDouble() - (_g3TempList.reduce(max) / 20);
+            _g3TempList.reduce(min).toDouble() - (_g3TempList.reduce(max) / 10);
         _g3YAxisRangeMax =
-            _g3TempList.reduce(max).toDouble() + (_g3TempList.reduce(max) / 20);
+            _g3TempList.reduce(max).toDouble() + (_g3TempList.reduce(max) / 10);
         break;
       case 'g4':
         _g4TempList.add(data);
         _g4YAxisRangeMin =
-            _g4TempList.reduce(min).toDouble() - (_g4TempList.reduce(max) / 20);
+            _g4TempList.reduce(min).toDouble() - (_g4TempList.reduce(max) / 10);
         _g4YAxisRangeMax =
-            _g4TempList.reduce(max).toDouble() + (_g4TempList.reduce(max) / 20);
+            _g4TempList.reduce(max).toDouble() + (_g4TempList.reduce(max) / 10);
         break;
       default:
         debugPrint("SOmething might be wrong in UpdateYAxisRange");
@@ -227,7 +229,6 @@ class GraphDisplay extends ChangeNotifier {
           if (index >= g1MaxIndexLength - 1) {
             g1ListIsFull = true;
           }
-          debugPrint("index : $index data : $data");
         } else {
           Future.delayed(const Duration(milliseconds: 200));
           _removeAllChartData(gIdentifier);
@@ -243,7 +244,6 @@ class GraphDisplay extends ChangeNotifier {
           if (index >= g2MaxIndexLength - 1) {
             g2ListIsFull = true;
           }
-          debugPrint("index : $index data : $data");
         } else {
           Future.delayed(const Duration(milliseconds: 200));
           _removeAllChartData(gIdentifier);
@@ -259,7 +259,6 @@ class GraphDisplay extends ChangeNotifier {
           if (index >= g3MaxIndexLength - 1) {
             g3ListIsFull = true;
           }
-          debugPrint("index : $index data : $data");
         } else {
           Future.delayed(const Duration(milliseconds: 200));
           _removeAllChartData(gIdentifier);
@@ -275,7 +274,6 @@ class GraphDisplay extends ChangeNotifier {
           if (index >= g4MaxIndexLength - 1) {
             g4ListIsFull = true;
           }
-          debugPrint("index : $index data : $data");
         } else {
           Future.delayed(const Duration(milliseconds: 200));
           _removeAllChartData(gIdentifier);
@@ -288,12 +286,45 @@ class GraphDisplay extends ChangeNotifier {
       default:
         debugPrint("Something might be wrong in UPDATE_CHART_POINTs");
     }
+    // debugPrint("Graph : $gIdentifier index : $index data : $data");
   }
 
 //Function for generating random values
   double _getRandomInt(int min, int max) {
     final Random random = Random();
     return min + random.nextInt(max - min) as double;
+  }
+
+//Add chart data points at index using identifier
+  void _addToChart(int index, double value, String gIdentifier) {
+    switch (gIdentifier) {
+      case 'g1':
+        _g1ChartData.add(ChartData(index, value));
+        g1ChartSeriesController.updateDataSource(
+          addedDataIndex: _g1ChartData.length,
+        );
+        break;
+      case 'g2':
+        _g2ChartData.add(ChartData(index, value));
+        g2ChartSeriesController.updateDataSource(
+          addedDataIndex: _g2ChartData.length,
+        );
+        break;
+      case 'g3':
+        _g3ChartData.add(ChartData(index, value));
+        g3ChartSeriesController.updateDataSource(
+          addedDataIndex: _g3ChartData.length,
+        );
+        break;
+      case 'g4':
+        _g4ChartData.add(ChartData(index, value));
+        g4ChartSeriesController.updateDataSource(
+          addedDataIndex: _g4ChartData.length,
+        );
+        break;
+      default:
+        debugPrint("Something might be wrong in ADD_TO_CHART");
+    }
   }
 
 //Updating and controlling graph layout

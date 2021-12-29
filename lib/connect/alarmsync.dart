@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:ventilator_ui/connect/services.dart';
 
 class AlarmSync extends ChangeNotifier {
-
   //TODO: Alarm real data
   late int _prmax = 100;
   late int _prmin = 60;
@@ -71,7 +70,6 @@ class AlarmSync extends ChangeNotifier {
   int get temprr => _temprr;
   int get tempfio2 => _tempfio2;
 
-
 //TODO: Alarm temp data update
   void tempAlarmUpdate(String value, int intValue) {
     switch (value) {
@@ -129,7 +127,7 @@ class AlarmSync extends ChangeNotifier {
     }
   }
 
-//TODO: Alarm real data sending 
+//TODO: Alarm real data sending
   void pushAlarmUpdate() async {
     var alarmUpdateValue = <String, int>{
       "prmin": _prmin,
