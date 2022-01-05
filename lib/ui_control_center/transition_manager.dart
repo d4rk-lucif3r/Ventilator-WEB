@@ -88,4 +88,13 @@ class TransitionManager extends ChangeNotifier {
     // debugPrint(
     // "$value : $_showSettings  $_showAlarms  $_showModes $_showPatientInfo $_showMapWindow");
   }
+
+  void allFalse() {
+    _showSettings = false;
+    _showModes = false;
+    _showAlarms = false;
+    _showPatientInfo = false;
+    _showMapWindow = false;
+    notifyListeners();
+  }
 }

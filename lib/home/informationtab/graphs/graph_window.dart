@@ -309,7 +309,7 @@ class _GraphInWindowState extends State<GraphInWindow> {
       ChartSync provider, String graphName) {
     return <SplineSeries<ChartData, num>>[
       SplineSeries<ChartData, num>(
-        animationDuration: 0,
+        animationDuration: 100,
         animationDelay: 0,
         onRendererCreated: (ChartSeriesController controller) {
           switch (graphName) {

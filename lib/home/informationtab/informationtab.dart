@@ -245,15 +245,15 @@ class _InformationTabState extends State<InformationTab> {
                                             Expanded(
                                               child: GestureDetector(
                                                 onTap: () {
-                                                  // transprovider.popUpCheck(
-                                                  //     'settings',
-                                                  //     !transprovider
-                                                  //         .showSettings);
+                                                  transprovider.popUpCheck(
+                                                      'settings',
+                                                      !transprovider
+                                                          .showSettings);
                                                   // widget.parentStateUpdate;
                                                   // debugPrint(
                                                   // "Settings pressed");
-                                                  provider.pralarm(
-                                                      !provider.ispralarm);
+                                                  // provider.pralarm(
+                                                  //     !provider.ispralarm);
                                                 },
                                                 child: SettingButton(
                                                   title: 'SETTINGS',
@@ -271,14 +271,14 @@ class _InformationTabState extends State<InformationTab> {
                                             Expanded(
                                               child: GestureDetector(
                                                 onTap: () {
-                                                  // transprovider.popUpCheck(
-                                                  //     'alarms',
-                                                  //     !transprovider
-                                                  //         .showAlarms);
+                                                  transprovider.popUpCheck(
+                                                      'alarms',
+                                                      !transprovider
+                                                          .showAlarms);
                                                   // widget.parentStateUpdate;
                                                   // debugPrint("Alarms pressed");
-                                                  provider.spo2alarm(
-                                                      !provider.isspo2alarm);
+                                                  // provider.spo2alarm(
+                                                  //     !provider.isspo2alarm);
                                                 },
                                                 child: SettingButton(
                                                   title: 'ALARM',
@@ -296,13 +296,13 @@ class _InformationTabState extends State<InformationTab> {
                                             Expanded(
                                               child: GestureDetector(
                                                 onTap: () {
-                                                  // transprovider.popUpCheck(
-                                                  //     'modes',
-                                                  //     !transprovider.showModes);
+                                                  transprovider.popUpCheck(
+                                                      'modes',
+                                                      !transprovider.showModes);
                                                   // widget.parentStateUpdate;
                                                   // debugPrint("Modes pressed");
-                                                  provider.pipalarm(
-                                                      !provider.ispipalarm);
+                                                  // provider.pipalarm(
+                                                  //     !provider.ispipalarm);
                                                 },
                                                 child: SettingButton(
                                                   title: 'MODE',
@@ -320,8 +320,9 @@ class _InformationTabState extends State<InformationTab> {
                                             Expanded(
                                               child: GestureDetector(
                                                 onTap: () {
-                                                  provider.peepalarm(
-                                                      !provider.ispeepalarm);
+                                                  transprovider.allFalse();
+                                                  // provider.peepalarm(
+                                                  //     !provider.ispeepalarm);
                                                 },
                                                 child: SettingButton(
                                                   title: 'EMERGENCY',
@@ -335,8 +336,9 @@ class _InformationTabState extends State<InformationTab> {
                                             Expanded(
                                               child: GestureDetector(
                                                 onTap: () {
-                                                  provider.i_ealarm(
-                                                      !provider.isi_ealarm);
+                                                  transprovider.allFalse();
+                                                  // provider.i_ealarm(
+                                                  //     !provider.isi_ealarm);
                                                 },
                                                 child: SettingButton(
                                                   title: 'RESET',

@@ -33,7 +33,7 @@ class _DisplayState extends State<Display> {
   late Timer timer;
   late Timer timerGraph;
   var count = 0;
-  Duration duration = const Duration(milliseconds: 200);
+  Duration duration = const Duration(milliseconds: 50);
 
   @override
   void initState() {
@@ -207,27 +207,27 @@ class _DisplayState extends State<Display> {
         //   //   },
         //   // );
         // });
-        // try {
-        //   timerGraph = Timer.periodic(
-        //     duration,
-        //     (timer) => setState(
-        //       () {
-        //         syncprovider.getChartData(timer, 'g1');
-        //         syncprovider.getChartData(timer, 'g2');
-        //         syncprovider.getChartData(timer, 'g3');
-        //         syncprovider.getChartData(timer, 'g4');
-        //         // providerecg1.getChartData(timer);
-        //         // providerecg2.getChartData(timer);
-        //         // providerecg3.getChartData(timer);
-        //         // providerecg4.getChartData(timer);
-        //         // debugPrint(count.toString());
-        //         timer.cancel();
-        //       },
-        //     ),
-        //   );
-        // } catch (e) {
-        //   debugPrint("Graph ERROR : $e");
-        // }
+        try {
+          timerGraph = Timer.periodic(
+            duration,
+            (timer) => setState(
+              () {
+                syncprovider.getChartData(timer, 'g1');
+                syncprovider.getChartData(timer, 'g2');
+                syncprovider.getChartData(timer, 'g3');
+                syncprovider.getChartData(timer, 'g4');
+                // providerecg1.getChartData(timer);
+                // providerecg2.getChartData(timer);
+                // providerecg3.getChartData(timer);
+                // providerecg4.getChartData(timer);
+                // debugPrint(count.toString());
+                timer.cancel();
+              },
+            ),
+          );
+        } catch (e) {
+          debugPrint("Graph ERROR : $e");
+        }
 
         // timertwo = Timer.periodic(
         //   duration,
