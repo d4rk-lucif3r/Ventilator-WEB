@@ -5,7 +5,7 @@ class AlarmSync extends ChangeNotifier {
   //TODO: Alarm real data
   late int _prmax = 100;
   late int _prmin = 60;
-  late int _spo2max = 101;
+  late int _spo2max = 100;
   late int _spo2min = 93;
   late int _pipmax = 30;
   late int _pipmin = 20;
@@ -13,7 +13,7 @@ class AlarmSync extends ChangeNotifier {
   late int _peepmin = 4;
   late int _sysmax = 180;
   late int _sysmin = 120;
-  late int _diamax = 150;
+  late int _diamax = 130;
   late int _diamin = 80;
   late int _tv = 600;
   late int _rr = 12;
@@ -22,7 +22,7 @@ class AlarmSync extends ChangeNotifier {
 //TODO: Alarm temporary data
   late int _tempprmax = 100;
   late int _tempprmin = 60;
-  late int _tempspo2max = 101;
+  late int _tempspo2max = 100;
   late int _tempspo2min = 93;
   late int _temppipmax = 30;
   late int _temppipmin = 20;
@@ -30,7 +30,7 @@ class AlarmSync extends ChangeNotifier {
   late int _temppeepmin = 4;
   late int _tempsysmax = 180;
   late int _tempsysmin = 120;
-  late int _tempdiamax = 150;
+  late int _tempdiamax = 130;
   late int _tempdiamin = 80;
   late int _temptv = 600;
   late int _temprr = 12;

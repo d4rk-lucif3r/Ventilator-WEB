@@ -678,130 +678,129 @@ class _DashboardState extends State<Dashboard> {
                     ),
                   ),
                   Expanded(
-                      flex: 26,
-                      child: Container(
-                        color: Colors.transparent,
-                        child: LayoutBuilder(
-                          builder: (context, constraints) {
-                            var infWidth = constraints.maxWidth;
-                            var infHeight = constraints.maxHeight;
+                    flex: 26,
+                    child: Container(
+                      color: Colors.transparent,
+                      child: LayoutBuilder(
+                        builder: (context, constraints) {
+                          var infWidth = constraints.maxWidth;
+                          var infHeight = constraints.maxHeight;
 
-                            return Stack(
-                              children: [
-                                SizedBox.expand(
-                                  child: Column(
-                                    children: [
-                                      SizedBox(
-                                        height: 5,
-                                        child: Container(
-                                          color: Colors.transparent,
-                                        ),
-                                      ),
-
-                                      //TODO: InformationTab
-                                      Expanded(
-                                        // flex: 10,
-                                        child: InformationTab(
-                                          // providerg:
-                                          //     provider,
-                                          syncprovider: widget.syncprovider,
-                                          // providerecg1: widget.providerecg1,
-                                          // providerecg2: widget.providerecg2,
-                                          // providerecg3: widget.providerecg3,
-                                          // providerecg4: widget.providerecg4,
-                                          // parentStateUpdate: widget.updateState,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Visibility(
-                                  visible: widget.transprovider.showMapWindow,
-                                  child: Positioned(
-                                    right: 10,
-                                    top: -2,
-                                    child: Container(
-                                      width: infWidth * .8 * .3,
-                                      height: infWidth * .8 * .2,
-                                      margin: const EdgeInsets.symmetric(
-                                        horizontal: 20,
-                                      ),
-                                      decoration: BoxDecoration(
+                          return Stack(
+                            children: [
+                              SizedBox.expand(
+                                child: Column(
+                                  children: [
+                                    SizedBox(
+                                      height: 5,
+                                      child: Container(
                                         color: Colors.transparent,
-                                        borderRadius: const BorderRadius.only(
-                                          bottomLeft: Radius.circular(10),
-                                          bottomRight: Radius.circular(10),
-                                        ),
-                                        border: Border.all(
-                                          width: .5,
-                                          style: BorderStyle.none,
-                                          color: Colors.black.withOpacity(.3),
-                                        ),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            offset: const Offset(0, 30),
-                                            color:
-                                                Colors.black.withOpacity(.15),
-                                            blurRadius: 30,
-                                            spreadRadius: 0,
-                                          ),
-                                        ],
                                       ),
-                                      child: PopUpMapWindow(
-                                        getLatlng:
-                                            widget.provider.lastUpdatedLocation,
+                                    ),
+
+                                    //TODO: InformationTab
+                                    Expanded(
+                                      // flex: 10,
+                                      child: InformationTab(
+                                        // providerg:
+                                        //     provider,
+                                        syncprovider: widget.syncprovider,
+                                        // providerecg1: widget.providerecg1,
+                                        // providerecg2: widget.providerecg2,
+                                        // providerecg3: widget.providerecg3,
+                                        // providerecg4: widget.providerecg4,
+                                        // parentStateUpdate: widget.updateState,
                                       ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Visibility(
+                                visible: widget.transprovider.showMapWindow,
+                                child: Positioned(
+                                  right: 10,
+                                  top: -2,
+                                  child: Container(
+                                    width: infWidth * .8 * .3,
+                                    height: infWidth * .8 * .2,
+                                    margin: const EdgeInsets.symmetric(
+                                      horizontal: 20,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: Colors.transparent,
+                                      borderRadius: const BorderRadius.only(
+                                        bottomLeft: Radius.circular(10),
+                                        bottomRight: Radius.circular(10),
+                                      ),
+                                      border: Border.all(
+                                        width: .5,
+                                        style: BorderStyle.none,
+                                        color: Colors.black.withOpacity(.3),
+                                      ),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          offset: const Offset(0, 30),
+                                          color: Colors.black.withOpacity(.15),
+                                          blurRadius: 30,
+                                          spreadRadius: 0,
+                                        ),
+                                      ],
+                                    ),
+                                    child: PopUpMapWindow(
+                                      getLatlng:
+                                          widget.provider.lastUpdatedLocation,
                                     ),
                                   ),
                                 ),
-                                Visibility(
-                                  visible: widget.transprovider.showPatienInfo,
-                                  child: Positioned(
-                                    left: 10,
-                                    top: -5,
-                                    child: Container(
-                                      width: infWidth * .2,
-                                      height: infHeight * .65,
-                                      margin: const EdgeInsets.symmetric(
-                                        horizontal: 20,
+                              ),
+                              Visibility(
+                                visible: widget.transprovider.showPatienInfo,
+                                child: Positioned(
+                                  left: 10,
+                                  top: -5,
+                                  child: Container(
+                                    width: infWidth * .2,
+                                    height: infHeight * .65,
+                                    margin: const EdgeInsets.symmetric(
+                                      horizontal: 20,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: Colors.transparent,
+                                      borderRadius: const BorderRadius.only(
+                                        bottomLeft: Radius.circular(10),
+                                        bottomRight: Radius.circular(10),
                                       ),
-                                      decoration: BoxDecoration(
-                                        color: Colors.transparent,
-                                        borderRadius: const BorderRadius.only(
-                                          bottomLeft: Radius.circular(10),
-                                          bottomRight: Radius.circular(10),
+                                      border: Border.all(
+                                        width: .5,
+                                        color: Colors.black.withOpacity(.3),
+                                      ),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          offset: const Offset(0, 30),
+                                          color: Colors.black.withOpacity(.25),
+                                          blurRadius: 30,
+                                          spreadRadius: 0,
                                         ),
-                                        border: Border.all(
-                                          width: .5,
-                                          color: Colors.black.withOpacity(.3),
-                                        ),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            offset: const Offset(0, 30),
-                                            color:
-                                                Colors.black.withOpacity(.25),
-                                            blurRadius: 30,
-                                            spreadRadius: 0,
-                                          ),
-                                        ],
-                                      ),
-                                      child: PatientProfile(
-                                        pname: widget.providerinfo.name,
-                                        page: widget.providerinfo.age,
-                                        psex: widget.providerinfo.sex,
-                                        pheight: widget.providerinfo.height,
-                                        pweight: widget.providerinfo.weight,
-                                        pbloodGroup:
-                                            widget.providerinfo.bloodGroup,
-                                      ),
+                                      ],
+                                    ),
+                                    child: PatientProfile(
+                                      pname: widget.providerinfo.name,
+                                      page: widget.providerinfo.age,
+                                      psex: widget.providerinfo.sex,
+                                      pheight: widget.providerinfo.height,
+                                      pweight: widget.providerinfo.weight,
+                                      pbloodGroup:
+                                          widget.providerinfo.bloodGroup,
                                     ),
                                   ),
                                 ),
-                              ],
-                            );
-                          },
-                        ),
-                      ))
+                              ),
+                            ],
+                          );
+                        },
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
