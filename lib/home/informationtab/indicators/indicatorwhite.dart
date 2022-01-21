@@ -123,18 +123,7 @@ class _IndicatorWhiteState extends State<IndicatorWhite>
           // if (widget.numberText1! < widget.minValue ||
           //     widget.numberText1! > widget.maxValue) {}
 
-          return
-
-              // GestureDetector(
-              //   onTap: widget.constValue == 100
-              //       ? () {}
-              //       : () {
-              //           print(widget.constValue);
-              //           provideral.updateAlarmWhich(widget.constValue);
-              //         },
-              //   child:
-
-              DefaultTextStyle(
+          return DefaultTextStyle(
             style: const TextStyle(
               inherit: false,
             ),
