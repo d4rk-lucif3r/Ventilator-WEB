@@ -454,48 +454,48 @@ class _LogInWindowState extends State<LogInWindow> {
                               //   debugPrint("HH");
                               // });
 
-                              if (emailAddress.isNotEmpty &&
-                                  password.isNotEmpty) {
-                                debugPrint(
-                                    "Email : $emailAddress \nPassword: $password");
-                                var loginCred =
-                                    await login(emailAddress, password);
-                                debugPrint("Button Events: \n\n${loginCred}");
+                              // if (emailAddress.isNotEmpty &&
+                              //     password.isNotEmpty) {
+                              //   debugPrint(
+                              //       "Email : $emailAddress \nPassword: $password");
+                              //   var loginCred =
+                              //       await login(emailAddress, password);
+                              //   debugPrint("Button Events: \n\n${loginCred}");
 
-                                // ignore: dead_code
-                                if (loginCred == 200) {
-                                  dispose();
-                                  Navigator.pop(context);
-                                  // debugPrint("${loginCred}");
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => const Display(),
-                                    ),
-                                  );
+                              //   // ignore: dead_code
+                              //   if (loginCred == 200) {
+                              //     dispose();
+                              //     Navigator.pop(context);
+                              //     // debugPrint("${loginCred}");
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const Display(),
+                                ),
+                              );
 
-                                  // Timer timer;
-                                  // timer = Timer.periodic(
-                                  //     Duration(milliseconds: 500),
-                                  //     (timer) async {
-                                  //   List<dynamic> streamData =
-                                  //       await fetchData("data?stream=1");
+                              // Timer timer;
+                              // timer = Timer.periodic(
+                              //     Duration(milliseconds: 500),
+                              //     (timer) async {
+                              //   List<dynamic> streamData =
+                              //       await fetchData("data?stream=1");
 
-                                  //   var pr = streamData[0]['1'].toString();
-                                  //   var spo2 = streamData[0]['2'].toString();
-                                  //   var pip = streamData[0]['3'].toString();
-                                  //   var peep = streamData[0]['4'].toString();
-                                  //   var i_e = streamData[0]['5'].toString();
-                                  //   var dia = streamData[0]['8'].toString();
-                                  //   var sys = streamData[0]['9'].toString();
-                                  //   var ecg1 = streamData[0]['6'];
-                                  //   debugPrint(
-                                  //       "ID : ${streamData[0]['0'].toString()}, $pr, $spo2, $pip, $peep, $i_e, $dia, $sys, $ecg1");
-                                  // });
-                                }
-                              } else {
-                                debugPrint("Email or password is missing");
-                              }
+                              //   var pr = streamData[0]['1'].toString();
+                              //   var spo2 = streamData[0]['2'].toString();
+                              //   var pip = streamData[0]['3'].toString();
+                              //   var peep = streamData[0]['4'].toString();
+                              //   var i_e = streamData[0]['5'].toString();
+                              //   var dia = streamData[0]['8'].toString();
+                              //   var sys = streamData[0]['9'].toString();
+                              //   var ecg1 = streamData[0]['6'];
+                              //   debugPrint(
+                              //       "ID : ${streamData[0]['0'].toString()}, $pr, $spo2, $pip, $peep, $i_e, $dia, $sys, $ecg1");
+                              // });
+                              //   }
+                              // } else {
+                              //   debugPrint("Email or password is missing");
+                              // }
                             },
                             child: AnimatedSwitcher(
                               key: UniqueKey(),

@@ -59,7 +59,7 @@ class _AppState extends State<App> {
     return const MaterialApp(
       home: DefaultTextStyle(
         style: TextStyle(inherit: false),
-        child: Display(),
+        child: LogInPage(),
       ),
       debugShowCheckedModeBanner: false,
     );
